@@ -1,0 +1,14 @@
+<h2>LOGIN</h2>
+<p>{{message}}</p>
+<p>
+    <button (click)="login()" *ngIf="!authService.isLoggedIn">Login</button>
+    <button (click)="logout()" *ngIf="authService.isLoggedIn">Logout</button>
+</p>
+
+<div>
+  <input type="radio" name="colors" (click)="color='lightgreen'">Green
+  <input type="radio" name="colors" (click)="color='yellow'">Yellow
+  <input type="radio" name="colors" (click)="color='cyan'">Cyan
+</div>
+<p [myHighlight]="color" (click)="login('abc')">Highlight me!</p>
+<p [myHighlight]="color" [defaultColor]="'violet'">Highlight me too!</p>
