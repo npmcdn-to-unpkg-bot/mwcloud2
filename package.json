@@ -8,9 +8,11 @@
     "url": ""
   },
   "scripts": {
-    "ci:forbidden-identifiers": "node ./scripts/ci/forbidden-identifiers.js",
+    "start": "ng serve",
+    "proxy": "ng serve --proxy http://apiview.mei1.info:9080/saas",
     "build": "ng build",
-    "mw-app": "ng serve",
+    "deploy": "",
+    "ci:forbidden-identifiers": "node ./scripts/ci/forbidden-identifiers.js",
     "test": "karma start test/karma.conf.js",
     "tslint": "tslint -c tslint.json 'src/**/*.ts'",
     "stylelint": "stylelint 'src/**/*.scss' --config stylelint-config.json --syntax scss",
@@ -19,9 +21,7 @@
     "postinstall": "npm run typings",
     "e2e": "MD_APP=e2e ng serve --proxy http://apiview.mei1.info:9080/saas",
     "inline-resources": "node ./scripts/release/inline-resources.js ./dist/components",
-    "deploy": "firebase deploy",
-    "webdriver-manager": "webdriver-manager",
-    "app": "ng serve --proxy http://apiview.mei1.info:9080/saas"
+    "webdriver-manager": "webdriver-manager"
   },
   "version": "2.0.0-alpha.5-2",
   "license": "MIT",
@@ -38,6 +38,7 @@
     "@angular/router": "3.0.0-alpha.8",
     "@angular2-material/button": "^2.0.0-alpha.5-2",
     "@angular2-material/core": "^2.0.0-alpha.5-2",
+    "bootstrap": "^3.3.6",
     "core-js": "^2.4.0",
     "hammerjs": "^2.0.8",
     "reflect-metadata": "^0.1.3",

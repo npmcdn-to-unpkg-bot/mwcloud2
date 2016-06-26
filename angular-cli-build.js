@@ -110,7 +110,8 @@ function _buildAppTree(defaults) {
       'hammerjs/*.min.+(js|js.map)',
       '@angular2-material/**/*',
       'jasmine-core/lib/jasmine-core/**/*',
-      'reflect-metadata/Reflect.js'
+      'reflect-metadata/Reflect.js',
+      'bootstrap/**/*'
     ]
   });
 }

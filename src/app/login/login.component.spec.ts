@@ -16,7 +16,7 @@ describe('test tests', () => {
 
 describe('order model test', () => {
     it('order.id==1 ?', () => {
-        let order: OrderModel = { id: 1, name: "order_name" };
+        let order: OrderModel = { id: 1, name: "order_name",power:"",alterEgo:"" };
         expect(order.id).toEqual(1);
     });
 });

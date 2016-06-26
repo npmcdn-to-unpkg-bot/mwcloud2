@@ -5,12 +5,12 @@ import { HTTP_PROVIDERS } from '@angular/http';
 
 import { MW_APP_ROUTER_PROVIDERS } from './mw-app/mw.app.routes';
 import { environment } from './environment';
-import { MwApp } from './mw-app/mw-app';
+import { MwAppComponent } from './mw-app/mw-app.component';
 
 if (environment.production) {
     enableProdMode();
 }
-bootstrap(MwApp, [
+bootstrap(MwAppComponent, [
     HTTP_PROVIDERS,
     MW_APP_ROUTER_PROVIDERS
 ]);

@@ -4,8 +4,8 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 @Component({
   moduleId: module.id,
   selector: 'dashboard',
-  templateUrl: 'dashboard.html',
-  styleUrls: ['dashboard.css'],
+  templateUrl: 'dashboard.component.html',
+  styleUrls: ['dashboard.component.css'],
   directives: [ROUTER_DIRECTIVES]
 })
-export class Dashboard { }
+export class DashboardComponent { }

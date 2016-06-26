@@ -5,9 +5,9 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
   moduleId: module.id,
   selector: 'mw-app',
   providers: [],
-  templateUrl: 'mw-app.html',
-  styleUrls: ['mw-app.css'],
+  templateUrl: 'mw-app.component.html',
+  styleUrls: ['mw-app.component.css'],
   pipes: [],
   directives: [ROUTER_DIRECTIVES]
 })
-export class MwApp { }
+export class MwAppComponent { }

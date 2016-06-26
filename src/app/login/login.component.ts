@@ -7,11 +7,11 @@ import '@mw/core/rxjs-operators/rxjs-operators';
 @Component({
   moduleId: module.id,
   selector: 'login',
-  templateUrl: 'login.html',
-  styleUrls: ['login.css'],
+  templateUrl: 'login.component.html',
+  styleUrls: ['login.component.css'],
   directives: [HighlightDirective],
 })
-export class Login {
+export class LoginComponent {
   message: string;
 
   constructor(public authService: AuthService, public router: Router) {
@@ -24,13 +24,14 @@ export class Login {
 
   login(username:string,password:string) {
     this.message = 'Trying to log in ...';
+    let self = this;
 
-    this.authService.login().subscribe(() => {
-      this.setMessage();
-      if (this.authService.isLoggedIn) {
+    this.authService.login(username,password).subscribe(() => {
+      self.setMessage();
+      if (self.authService.isLoggedIn) {
         // Todo: capture where the user was going and nav there.
         // Meanwhile redirect the user to the crisis admin
-        this.router.navigate(['/dashboard/order']);
+        self.router.navigate(['/dashboard/order']);
       }
     });
   }

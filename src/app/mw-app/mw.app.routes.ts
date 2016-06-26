@@ -5,22 +5,22 @@ import { AuthGuard }             from './auth.guard';
 //import { AuthService }        from './auth.service';
 import { AuthService } from '@mw/core/core';
 
-import { Login } from '../login/login';
-import { ButtonDemo } from '../button/button-demo';
-import { Dashboard } from '../dashboard/dashboard';
-import { Order } from '../order/order';
+import { LoginComponent } from '../login/login.component';
+import { ButtonComponent } from '../button/button.component';
+import { DashboardComponent } from '../dashboard/dashboard.component';
+import { OrderComponent } from '../order/order.component';
 
 export const routes: RouterConfig = [
-    { path: '', redirectTo: '/button', terminal: true },
+    { path: '', redirectTo: '/login', terminal: true },
     { path: 'dashboard', redirectTo: '/dashboard/order', terminal: true },
-    { path: 'login', component: Login ,canDeactivate: [CanDeactivateGuard]}, 
-    { path: 'button', component: ButtonDemo }, 
+    { path: 'login', component: LoginComponent ,canDeactivate: [CanDeactivateGuard]}, 
+    { path: 'button', component: ButtonComponent }, 
     {
         path: 'dashboard',
-        component: Dashboard,
+        component: DashboardComponent,
         children: [{
             path: 'order',
-            component: Order,
+            component: OrderComponent,
             canActivate: [AuthGuard]
         }]
     }

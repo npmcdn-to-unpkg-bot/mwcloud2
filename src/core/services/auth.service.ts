@@ -23,15 +23,16 @@ export class AuthService {
     //         .catch(this.handleError);
     // }
 
-    login() {
-        //return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
-        let body = JSON.stringify({ username: "", password: "", rememberMe: false });
+    login(username:string,password:string) {
+        let body = JSON.stringify({ username: username, password: password, rememberMe: false });
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
+        this.isLoggedIn = true;
         return this.http.post(this.login_url, body, options)
             .map(this.extractData)
             .catch(this.handleError);
+        //return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
     }
 
     logout() {
@@ -40,7 +41,6 @@ export class AuthService {
 
     private extractData(res: Response) {
         let body = res.json();
-        this.isLoggedIn = true
         return body.data || {};
     }
 
