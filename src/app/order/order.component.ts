@@ -23,7 +23,6 @@ export class OrderComponent {
 
     constructor(service: QuestionService) {
         this.questions = service.getQuestions();
-        debugger;
     }
 
     onSubmit() { this.submitted = true; }

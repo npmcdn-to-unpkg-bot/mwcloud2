@@ -1,9 +1,9 @@
 <div>
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
-    <div *ngFor="let question of questions" class="form-row">
+    <div *ngFor="let question of questions" class="form-row form-group">
       <df-question [question]="question" [form]="form"></df-question>
     </div>
-    <div class="form-row">
+    <div class="form-row form-group">
       <button type="submit" [disabled]="!form.valid">Save</button>
     </div>
   </form>
