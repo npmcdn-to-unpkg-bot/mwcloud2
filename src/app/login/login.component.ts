@@ -3,13 +3,16 @@ import { Router }      from '@angular/router';
 
 import { AuthService ,HighlightDirective } from '@mw/core/core';
 import '@mw/core/rxjs-operators/rxjs-operators';
+import {MdIcon} from '@angular2-material/icon/icon';
+import {MD_ICON_DIRECTIVES, MdIconRegistry} from '@angular2-material/icon';
 
 @Component({
   moduleId: module.id,
   selector: 'login',
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css'],
-  directives: [HighlightDirective],
+  providers: [MdIconRegistry],
+  directives: [HighlightDirective,MdIcon,MD_ICON_DIRECTIVES],
 })
 export class LoginComponent {
   message: string;

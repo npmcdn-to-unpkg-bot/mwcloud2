@@ -10,3 +10,9 @@
     @include md-elevation($zValue);
   }
 }
+
+@for $zValue from 16 through 28 {
+  .md-#{$zValue} {
+    font-size: $zValue;
+  }
+}

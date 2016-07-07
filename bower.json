@@ -1,0 +1,23 @@
+{
+  "name": "mwcloud2",
+  "description": "mwcloud2",
+  "main": "",
+  "authors": [
+    "朱坤 <kun.zhu@mei1.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zk1169/mwcloud2",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "gridism": "^0.2.2",
+    "material-color": "^2.2.1",
+    "material-design-icons": "^2.2.3"
+  }
+}

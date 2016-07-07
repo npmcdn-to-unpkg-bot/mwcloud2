@@ -5,7 +5,7 @@ describe('MyUppercasePipe', () => {
     pipe = new MyUppercasePipe();
   });
   it('transforms "abc" to "ABC"', () => {
-    expect(pipe.transform('abc')).toEqual('ABC');
+    expect(pipe.transform('abc')).toEqual('ABCD');
   });
   it('transforms "abc def" to "ABC DEF"', () => {
     expect(pipe.transform('abc def')).toEqual('ABC DEF');

@@ -1,5 +1,44 @@
-
 .dashboard {
-  
+    padding-top: 58px;
+    padding-left: 230px;
+    background: #EAEBEC;
+    .mw-sidebar {
+        width: 230px;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        background: #2b333d;
+        md-toolbar{
+            background: #2b333d;
+        }
+        .menu-item {
+            color: #c5d0de;
+            text-decoration: none;
+            padding: 7px 15px;
+            line-height: 24px;
+            padding-left: 22px;
+            display: block;
+            md-icon{
+                margin-right: 13px;
+            }
+        }
+        .menu-item:hover {
+            color: #fff;
+            background: #24272d;
+        }
+    }
+    .mw-body {
+        min-height: 100vh;
+        width: 100%;
+        .mw-header {
+            background: white;
+            height: 58px;
+            position: fixed;
+            left: 230px;
+            right: 0;
+            top: 0;
+        }
+        .mw-content {}
+    }
 }
-

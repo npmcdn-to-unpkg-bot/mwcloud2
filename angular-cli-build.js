@@ -43,6 +43,9 @@ function _buildDemoAppInputTree() {
     }),
     new Funnel('src/app', {
       destDir: 'src/app'
+    }),
+    new Funnel('public', {
+      destDir: 'public'
     })
   ]);
 }
@@ -111,7 +114,8 @@ function _buildAppTree(defaults) {
       '@angular2-material/**/*',
       'jasmine-core/lib/jasmine-core/**/*',
       'reflect-metadata/Reflect.js',
-      'bootstrap/**/*'
+      'bootstrap/**/*',
+      'material-design-icons-iconfont/dist/**/*'
     ]
   });
 }

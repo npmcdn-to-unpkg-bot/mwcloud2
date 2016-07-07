@@ -1,2 +1,23 @@
-<p>dashboard</p>
-<router-outlet></router-outlet>
+<div class="dashboard">
+    <div class="mw-sidebar">
+        <md-toolbar>
+        </md-toolbar>
+        <md-nav-list>
+            <a [routerLink]="['button']" class="menu-item">
+                <!-- <md-icon class="md-18">menu</md-icon> -->
+                <span>Button</span>
+            </a>
+            <a [routerLink]="['button-toggle']" class="menu-item"><span>Button Toggle</span></a>
+            <a [routerLink]="['card']" class="menu-item"><span>Card</span></a>
+            <a [routerLink]="['baseline']" class="menu-item"><span>Baseline</span></a>
+        </md-nav-list>
+        <!-- <button md-button (click)="start.close()">CLOSE</button> -->
+    </div>
+    <div class="mw-body">
+        <md-toolbar class="mw-header">
+        </md-toolbar>
+        <div class="mw-content">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

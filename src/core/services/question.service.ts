@@ -21,6 +21,17 @@ export class QuestionService {
         ],
         order: 3
       }),
+      new DropdownQuestion({
+        key: 'brave',
+        label: 'Bravery Rating',
+        options: [
+          {key: 'solid',  value: 'Solid'},
+          {key: 'great',  value: 'Great'},
+          {key: 'good',   value: 'Good'},
+          {key: 'unproven', value: 'Unproven'}
+        ],
+        order: 4
+      }),
       new TextboxQuestion({
         key: 'firstName',
         label: 'First name',
@@ -33,6 +44,18 @@ export class QuestionService {
         label: 'Email',
         type: 'email',
         order: 2
+      }),
+      new TextboxQuestion({
+        key: 'newTextbox',
+        label: 'newTextbox',
+        type: 'email',
+        order: 1
+      }),
+      new TextboxQuestion({
+        key: 'emailAddress2',
+        label: 'Email2',
+        type: 'email2',
+        order: 1
       })
     ];
     return questions.sort((a, b) => a.order - b.order);
