@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "ng serve",
-    "proxy": "ng serve --proxy http://apiview.mei1.info:9080/saas",
+    "proxy": "ng serve --proxy http://newtest.mei1.com",
     "build": "ng build",
     "deploy": "",
     "ci:forbidden-identifiers": "node ./scripts/ci/forbidden-identifiers.js",
@@ -42,6 +42,7 @@
     "@angular2-material/icon": "^2.0.0-alpha.6",
     "@angular2-material/list": "^2.0.0-alpha.6",
     "@angular2-material/toolbar": "^2.0.0-alpha.6",
+    "angular2-toaster": "^0.3.6-rc.4",
     "bootstrap": "^3.3.6",
     "core-js": "^2.4.0",
     "hammerjs": "^2.0.8",

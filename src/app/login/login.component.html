@@ -17,39 +17,40 @@
         <!-- <img src="/assets/images/logo.png" alt="美问云"> -->
     </header>
     <section class="Session">
-        <form class="clearfix grid" role="form">
+        <div class="clearfix grid">
             <legend class="form-title">登录</legend>
             <div class="form-group">
                 <label class="sr-only" for="identity">账号：</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                    	<md-icon class="md-18">account_circle</md-icon>
+                    	<!-- <md-icon class="md-18">account_circle</md-icon> -->
+                        <i class="fa fa-user"></i>
         			</span>
-                    <input type="text" class="form-control" placeholder="登录帐号" />
+                    <input type="text" class="form-control" placeholder="登录帐号" [(ngModel)]="model.user_name"/>
                 </div>
             </div>
             <div class="form-group">
                 <label class="sr-only" for="password">密码：</label>
                 <div class="input-group">
                     <span class="input-group-addon">
-                    	<md-icon class="md-18">vpn_key</md-icon>
+                        <i class="fa fa-key"></i>
         			</span>
-                    <input type="password" class="form-control" placeholder="密码" />
+                    <input type="password" class="form-control" placeholder="密码" [(ngModel)]="model.password"/>
                 </div>
             </div>
             <div class="unit half align-left login-action">
                 <!-- <div class="checkbox checkbox-primary"> -->
-                    <input type="checkbox" id="remember">
+                    <input type="checkbox" id="remember" [(ngModel)]="model.remember">
                     <label for="remember">保持登录</label>
                 <!-- </div> -->
             </div>
             <div class="unit half align-center">
-                <button type="submit" class="button-primary button-block">
-                	<!-- <md-icon class="md-18">directions</md-icon> -->
+                <button type="submit" class="btn btn-primary button-block" (click)="login()">
+                	<i class="fa fa-sign-in"></i>
                 	<span>登录</span>
                 </button>
             </div>
-        </form>
+        </div>
         <div class="Session-links grid">
             <div class="unit half align-center">
                 <a href="">创建新账号</a>

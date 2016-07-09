@@ -115,7 +115,9 @@ function _buildAppTree(defaults) {
       'jasmine-core/lib/jasmine-core/**/*',
       'reflect-metadata/Reflect.js',
       'bootstrap/**/*',
-      'material-design-icons-iconfont/dist/**/*'
+      'material-design-icons-iconfont/dist/**/*',
+      'font-awesome/**/*',
+      'angular2-toaster/**/*'
     ]
   });
 }
