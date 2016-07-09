@@ -19,14 +19,16 @@ export class HttpService {
     }
 
     request(url: string, method: string, data: any) {
-        let body = JSON.stringify(data);
+        let body:any = null;
+        if(data){
+            body = JSON.stringify(data);
+        }
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers, method: method, body: body });
         let self = this;
         return this.http.request(url, options)
             .map(this.extractData)
             .catch((error: any) => {
-                debugger;
                 let error_message = (error.message) ? error.message :
                     error.status ? `${error.status} - ${error.statusText}` : 'Server error';
                 let error_code = (error.code) ? error.code : error.status ? error.status : "500";

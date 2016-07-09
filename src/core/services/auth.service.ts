@@ -1,47 +1,119 @@
 // Observable Version
 import { Injectable } from '@angular/core';
-import {  Response } from '@angular/http';
+//import {  Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/observable/merge';
+//import 'rxjs/add/operator/take';
+import 'rxjs/add/operator/reduce';
+import 'rxjs/add/operator/switchMap';
 import { AuthModel } from '../models/auth.model';
 import { HttpService } from './http.service';
 
 
 @Injectable()
 export class AuthService {
-    isLoggedIn: boolean = false;
+    is_login_in: boolean = false;
+    permission_code_list:any[] = [];
+    permission_store_list:any[] = [];
     constructor(private http_service: HttpService) {}
 
-    login(model:AuthModel) {
+    login(model: AuthModel) {
         let self = this;
         let data = {
-            username:model.user_name,
-            password:this.base64encode(model.password),
-            rememberMe:model.remember
+            username: model.user_name,
+            password: this.base64encode(model.password),
+            rememberMe: model.remember
         };
-        return this.http_service.request('/api/auth/form','post',data)
-            .map((res:Response)=>{
-                debugger;
-                self.isLoggedIn = true;
-                return res;
-            })
-            .catch((error:any)=>{
-                debugger;
-                self.isLoggedIn = false;
+        return this.http_service.request('/api/auth/form', 'post', data)
+            // .map((res)=>{
+            //     debugger;
+            //     self.get_employee_list(res,self);
+            // })
+            .switchMap((res) => self.get_employee_list(res, self))
+            .catch((error: any) => {
+                self.is_login_in = false;
                 return Observable.throw(error);
             });
-        //return Observable.of(true).delay(1000).do(val => this.isLoggedIn = true);
+        //return Observable.of(true).delay(1000).do(val => this.is_login_in = true);
+    }
+
+    get_employee_list(user_id: string, self: AuthService) {
+        return this.http_service.request('/api/employee/list/account/' + user_id, 'get', null)
+            .switchMap((res) => self.employee_login(res[0].id, self))
+            .catch((error: any) => {
+                self.is_login_in = false;
+                return Observable.throw(error);
+            });
+    }
+
+    employee_login(emp_id: string, self: AuthService) {
+        return this.http_service.request('/api/employee/login/' + emp_id, 'put', null)
+            .map((res) => {
+                self.is_login_in = true;
+                return res;
+            })
+            .catch((error: any) => {
+                self.is_login_in = false;
+                return Observable.throw(error);
+            });
+    }
+
+    get_permissions(emp_id: string) {
+        var self = this;
+        return this.http_service.request('/api/employee/permissions/' + emp_id, 'get', null)
+            .map((res) => {
+                self.is_login_in = true;
+                return res;
+            })
+            .catch((error: any) => {
+                self.is_login_in = false;
+                return Observable.throw(error);
+            });
+    }
+
+    get_permission_store_list(emp_id: string) {
+        var self = this;
+        return this.http_service.request('/api/employee/permissionStores/' + emp_id, 'get', null)
+            .map((res) => {
+                return res;
+            })
+            .catch((error: any) => {
+                self.is_login_in = false;
+                return Observable.throw(error);
+            });
+    }
+
+    get_permission(emp_id: string) {
+        // var timer1 = Observable.interval(1000).take(10);
+        // var timer2 = Observable.interval(2000).take(6);
+        // var timer3 = Observable.interval(500).take(10);
+        // var concurrent = 2; // the argument
+        // //var merged = Observable.merge(timer1, timer2, timer3, concurrent);
+        // var merged = Observable.merge(timer1,timer3,1);
+        // merged.subscribe(x => console.log(x));
+        var self = this;
+        return Observable.merge(this.get_permission_store_list(emp_id), this.get_permissions(emp_id))
+            .reduce((res1:any[],res2:any[])=>{
+                self.permission_store_list = res1;
+                self.permission_code_list = res2;
+                return null;
+            })
+            .catch((error: any) => {
+                return Observable.throw(error);
+            });
     }
 
     logout() {
-        this.isLoggedIn = false;
+        this.is_login_in = false;
     }
 
     private base64encode(str: string) {
         let base64EncodeChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-        let out:any, i:any, len:any;　　
-        let c1:any, c2:any, c3:any;　　
+        let out: any, i: any, len: any;　　
+        let c1: any, c2: any, c3: any;　　
         len = str.length;　　
         i = 0;　　
         out = "";　　
