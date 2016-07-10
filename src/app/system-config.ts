@@ -9,8 +9,9 @@ System.defaultJSExtensions = true;
 /** Map relative paths to URLs. */
 const map: any = {
    '@angular2-material': 'vendor/@angular2-material',
+   '@mw/core': 'core',
    'angular2-toaster': 'vendor/angular2-toaster',
-   '@mw/core': 'core'
+   'ng2-cookies': 'vendor/ng2-cookies'
 };
 
 /** User packages configuration. */

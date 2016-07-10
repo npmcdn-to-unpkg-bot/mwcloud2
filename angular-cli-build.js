@@ -117,7 +117,8 @@ function _buildAppTree(defaults) {
       'bootstrap/**/*',
       'material-design-icons-iconfont/dist/**/*',
       'font-awesome/**/*',
-      'angular2-toaster/**/*'
+      'angular2-toaster/**/*',
+      'ng2-cookies/**/*'
     ]
   });
 }

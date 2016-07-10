@@ -34,7 +34,7 @@ export class LoginComponent {
         this.authService.get_permission(emp_id).subscribe(
             (res) => {
                 if (self.authService.is_login_in) {
-                    self.router.navigate(['/dashboard/order']);
+                    self.router.navigate(['/dashboard/order-list']);
                 }
             },
             (error) => {}

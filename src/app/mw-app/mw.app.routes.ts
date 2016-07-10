@@ -8,6 +8,7 @@ import { LoginComponent } from '../login/login.component';
 import { ButtonComponent } from '../button/button.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { OrderComponent } from '../order/order.component';
+import { OrderListComponent } from '../order-list/order-list.component';
 import { RegisterComponent } from '../register/register.component';
 import { IndexComponent } from '../index/index.component';
 
@@ -22,6 +23,7 @@ export const routes: RouterConfig = [
             { path: 'index', component: IndexComponent },
             { path: 'button', component: ButtonComponent },
             { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
+            { path: 'order-list', component: OrderListComponent, canActivate: [AuthGuard] },
             { path: 'register', component: RegisterComponent, canDeactivate: [CanDeactivateGuard] }
         ]
     }

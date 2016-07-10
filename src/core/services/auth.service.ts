@@ -11,11 +11,13 @@ import 'rxjs/add/operator/reduce';
 import 'rxjs/add/operator/switchMap';
 import { AuthModel } from '../models/auth.model';
 import { HttpService } from './http.service';
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 
 @Injectable()
 export class AuthService {
-    is_login_in: boolean = false;
+    is_login_in: boolean = true;
+    emp_info:any;
     permission_code_list:any[] = [];
     permission_store_list:any[] = [];
     constructor(private http_service: HttpService) {}
@@ -42,14 +44,31 @@ export class AuthService {
 
     get_employee_list(user_id: string, self: AuthService) {
         return this.http_service.request('/api/employee/list/account/' + user_id, 'get', null)
-            .switchMap((res) => self.employee_login(res[0].id, self))
+            .switchMap((res) => self.employee_login(res, self))
             .catch((error: any) => {
                 self.is_login_in = false;
                 return Observable.throw(error);
             });
     }
 
-    employee_login(emp_id: string, self: AuthService) {
+    employee_login(emp_list: any, self: AuthService) {
+        let emp_id:number = null;
+        if(emp_list && emp_list.length > 0){
+            emp_id = emp_list[0].id;
+            self.emp_info = emp_list[0];
+            self.emp_info = {
+                mch_id:emp_list[0].merchant.id,
+                mch_name:emp_list[0].merchant.name,
+                store_id:emp_list[0].store.id,
+                store_name:emp_list[0].store.name,
+                emp_id:emp_list[0].id,
+                emp_name:emp_list[0].name
+            };
+            Cookie.set('emp_info',JSON.stringify(self.emp_info));
+        }else{
+            return;
+        }
+        
         return this.http_service.request('/api/employee/login/' + emp_id, 'put', null)
             .map((res) => {
                 self.is_login_in = true;

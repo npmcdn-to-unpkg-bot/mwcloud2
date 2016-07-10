@@ -1,15 +1,23 @@
 // Observable Version
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Headers, RequestOptions } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+import { HttpService } from './http.service';
 import { OrderModel } from '../models/order.model';
 
 
 @Injectable()
 export class OrderService {
-    constructor(private http: Http) {}
+    constructor(private http_service: HttpService) {}
 
-    private heroesUrl = '/api/auth/form'; // URL to web API
+    get_order_list(mch_id:string) {
+        let data = {page:0,size:10};
+        return this.http_service.request('/api/order/getList', 'post', data)
+            .map((res)=>{
+                return res;
+            })
+            .catch((error: any) => {
+                return Observable.throw(error);
+            });
+    }
 }
