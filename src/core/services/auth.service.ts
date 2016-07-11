@@ -11,7 +11,7 @@ import 'rxjs/add/operator/reduce';
 import 'rxjs/add/operator/switchMap';
 import { AuthModel } from '../models/auth.model';
 import { HttpService } from './http.service';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
+//import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 
 @Injectable()
@@ -64,7 +64,7 @@ export class AuthService {
                 emp_id:emp_list[0].id,
                 emp_name:emp_list[0].name
             };
-            Cookie.set('emp_info',JSON.stringify(self.emp_info));
+            //Cookie.set('emp_info',JSON.stringify(self.emp_info));
         }else{
             return;
         }

@@ -7,7 +7,7 @@ import { MwThemePreloader } from '@mw/core/services/mw-theme-preload.service';
 import { MwImageLoaderService } from '@mw/core/services/mw-image-loader.service';
 import { AppState } from '../app.state';
 import { AuthService } from '@mw/core/services/auth.service';
-import { Cookie } from 'ng2-cookies/ng2-cookies';
+//import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Component({
     moduleId: module.id,
@@ -37,10 +37,10 @@ export class MwAppComponent {
             // this.toasterService.pop('info', 'Title', message);
             // this.toasterService.pop('error', 'Title', message);
         });
-        var emp_info_str = Cookie.get("emp_info");
-        if(emp_info_str && emp_info_str.length > 0){
-            this.auth_service.emp_info = JSON.parse(emp_info_str);
-        }
+        // var emp_info_str = Cookie.get("emp_info");
+        // if(emp_info_str && emp_info_str.length > 0){
+        //     this.auth_service.emp_info = JSON.parse(emp_info_str);
+        // }
     }
 
     public toasterconfig: ToasterConfig =

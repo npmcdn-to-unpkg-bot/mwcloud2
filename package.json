@@ -83,7 +83,7 @@
     "symlink-or-copy": "^1.0.1",
     "ts-node": "^0.7.3",
     "tslint": "^3.6.0",
-    "typescript": "^1.8.10",
+    "typescript": "^1.9.0-dev",
     "typings": "^1.0.4",
     "which": "^1.2.4"
   }
