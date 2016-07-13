@@ -12,7 +12,7 @@ import { HttpService } from '@mw/core/services/http.service';
 if (environment.production) {
     enableProdMode();
 }
-bootstrap(MwAppComponent, [
+var appPromise = bootstrap(MwAppComponent, [
     HTTP_PROVIDERS,
     HttpService,
     ToasterService,
@@ -20,4 +20,4 @@ bootstrap(MwAppComponent, [
     disableDeprecatedForms(),
   	provideForms()
 ])
-.catch((err: any) => console.error(err));;
+.catch((err: any) => console.error(err));

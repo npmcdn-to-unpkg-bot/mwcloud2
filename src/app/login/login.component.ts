@@ -18,6 +18,7 @@ export class LoginComponent {
     constructor(private _state: AppState, public authService: AuthService, public router: Router) {}
 
     login() {
+        debugger;
         let self = this;
         this.authService.login(this.model).subscribe(
             (res) => {
