@@ -1,7 +1,7 @@
 import { provideRouter, RouterConfig } from '@angular/router';
 
-import { CanDeactivateGuard } from './interfaces';
-import { AuthGuard } from './auth.guard';
+import { CanDeactivateGuard } from '@mw/core/services/interfaces';
+import { AuthGuard } from '@mw/core/services/auth.guard';
 import { AuthService } from '@mw/core/core';
 
 import { LoginComponent } from '../login/login.component';

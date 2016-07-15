@@ -2,6 +2,9 @@
     padding-top: 58px;
     padding-left: 230px;
     background: #EAEBEC;
+    md-toolbar {
+        z-index: 1;
+    }
     .mw-sidebar {
         width: 230px;
         position: fixed;
@@ -9,7 +12,7 @@
         top: 0;
         height: 100vh;
         background: #2b333d;
-        md-toolbar{
+        md-toolbar {
             background: #2b333d;
         }
         .menu-item {
@@ -19,7 +22,7 @@
             line-height: 24px;
             padding-left: 22px;
             display: block;
-            md-icon{
+            md-icon {
                 margin-right: 13px;
             }
         }

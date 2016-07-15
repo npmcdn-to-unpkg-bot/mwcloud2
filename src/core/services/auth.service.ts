@@ -16,7 +16,7 @@ import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
 @Injectable()
 export class AuthService {
-    is_login_in: boolean = true;
+    is_login_in: boolean = false;
     emp_info:any;
     permission_code_list:any[] = [];
     permission_store_list:any[] = [];

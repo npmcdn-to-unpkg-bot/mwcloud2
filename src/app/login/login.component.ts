@@ -4,13 +4,20 @@ import { Router } from '@angular/router';
 import { AuthService } from '@mw/core/core';
 import { AuthModel } from '@mw/core/models/auth.model';
 import { AppState } from '../app.state';
+import { MwThemeSpinner } from '@mw/core/services/mw-theme-spinner.service';
+import { MwThemePreloader } from '@mw/core/services/mw-theme-preload.service';
+import { MwImageLoaderService } from '@mw/core/services/mw-image-loader.service';
 
 @Component({
     moduleId: module.id,
     selector: 'login',
     templateUrl: 'login.component.html',
     styleUrls: ['login.component.css'],
-    providers: [],
+    providers: [
+        MwThemeSpinner,
+        MwThemePreloader,
+        MwImageLoaderService
+    ],
     directives: [],
 })
 export class LoginComponent {
@@ -18,8 +25,12 @@ export class LoginComponent {
     constructor(
         private _state: AppState, 
         public authService: AuthService, 
-        public router: Router
-    ) {}
+        public router: Router,
+        private _imageLoader: MwImageLoaderService,
+        private _spinner: MwThemeSpinner
+    ) {
+        this.loadImages();
+    }
 
     login() {
         // this.slimLoadingBarService.start(() => {
@@ -50,5 +61,17 @@ export class LoginComponent {
 
     logout() {
         this.authService.logout();
+    }
+
+    public ngAfterViewInit(): void {
+        // hide spinner once all loaders are completed
+        MwThemePreloader.load().then((values) => {
+            this._spinner.hide();
+        });
+    }
+
+    private loadImages(): void {
+        // register some loaders
+        MwThemePreloader.registerLoader(this._imageLoader.load('assets/images/login.jpg'));
     }
 }
