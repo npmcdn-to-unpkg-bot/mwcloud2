@@ -3,13 +3,18 @@
         <md-toolbar>
         </md-toolbar>
         <md-nav-list>
-            <a [routerLink]="['button']" class="menu-item">
-                <!-- <md-icon class="md-18">menu</md-icon> -->
-                <span>Button</span>
+            <a [routerLink]="['/login']" class="menu-item">
+                <i class="fa fa-user"></i>
+                <span>Login</span>
             </a>
-            <a [routerLink]="['button-toggle']" class="menu-item"><span>Button Toggle</span></a>
-            <a [routerLink]="['card']" class="menu-item"><span>Card</span></a>
-            <a [routerLink]="['baseline']" class="menu-item"><span>Baseline</span></a>
+            <a [routerLink]="['/dashboard/order']" class="menu-item">
+                <i class="fa fa-user"></i>
+                <span>Order</span>
+            </a>
+            <a [routerLink]="['/dashboard/order-list']" class="menu-item">
+                <i class="fa fa-user"></i>
+                <span>Order List</span>
+            </a>
         </md-nav-list>
         <!-- <button md-button (click)="start.close()">CLOSE</button> -->
     </div>

@@ -15,10 +15,16 @@ import { AppState } from '../app.state';
 })
 export class LoginComponent {
     model = new AuthModel("", "", true);
-    constructor(private _state: AppState, public authService: AuthService, public router: Router) {}
+    constructor(
+        private _state: AppState, 
+        public authService: AuthService, 
+        public router: Router
+    ) {}
 
     login() {
-        debugger;
+        // this.slimLoadingBarService.start(() => {
+        //     console.log('Loading complete');
+        // });
         let self = this;
         this.authService.login(this.model).subscribe(
             (res) => {

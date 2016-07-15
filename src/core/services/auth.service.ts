@@ -11,7 +11,7 @@ import 'rxjs/add/operator/reduce';
 import 'rxjs/add/operator/switchMap';
 import { AuthModel } from '../models/auth.model';
 import { HttpService } from './http.service';
-//import { Cookie } from 'ng2-cookies/ng2-cookies';
+import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
 
 @Injectable()
@@ -20,7 +20,7 @@ export class AuthService {
     emp_info:any;
     permission_code_list:any[] = [];
     permission_store_list:any[] = [];
-    constructor(private http_service: HttpService) {}
+    constructor(private http_service: HttpService,private toasterService: ToasterService,private window: Window) {}
 
     login(model: AuthModel) {
         let self = this;
@@ -64,8 +64,9 @@ export class AuthService {
                 emp_id:emp_list[0].id,
                 emp_name:emp_list[0].name
             };
-            //Cookie.set('emp_info',JSON.stringify(self.emp_info));
+            this.window.localStorage.setItem('emp_info',JSON.stringify(self.emp_info));
         }else{
+            this.toasterService.pop("error","Title","获取员工身份失败");
             return;
         }
         

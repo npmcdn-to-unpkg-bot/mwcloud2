@@ -17,7 +17,6 @@ export class OrderListComponent implements OnInit {
   ngOnInit() {
   	this.order_service.get_order_list(this.auth_service.emp_info.mch_id).subscribe(
             (res) => {
-            	debugger;
             },
             (error) => {}
         );

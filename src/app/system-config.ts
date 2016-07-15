@@ -10,11 +10,21 @@ System.defaultJSExtensions = true;
 const map: any = {
    '@angular2-material': 'vendor/@angular2-material',
    '@mw/core': 'core',
-   'angular2-toaster': 'vendor/angular2-toaster'
+   'angular2-toaster': 'vendor/angular2-toaster',
+   'ng2-slim-loading-bar': 'vendor/ng2-slim-loading-bar'
 };
 
 /** User packages configuration. */
 const packages: any = {
+  '@mw/core': {
+    format: 'cjs',
+    defaultExtension: 'js'
+  },
+  // Set the default extension for the root package, because otherwise the demo-app can't
+  // be built within the production mode. Due to missing file extensions.
+  '.': {
+    defaultExtension: 'js'
+  }
 };
 
 // put the names of any of your Material components here
@@ -28,12 +38,6 @@ const materialPkgs:string[] = [
 materialPkgs.forEach((pkg) => {
   packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
 });
-
-const mwComponents = [
-  'card'
-];
-mwComponents.forEach(name => map[`@mw/${name}`] = `components/${name}`);
-
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
@@ -55,13 +59,12 @@ const barrels: string[] = [
 
   // App specific barrels.
   'app',
-  ...mwComponents,
   /** @cli-barrel */
 ];
 
 const _cliSystemConfig = {};
 barrels.forEach((barrelName: string) => {
-  (<any> _cliSystemConfig)[barrelName] = { main: 'index' };
+  (<any> _cliSystemConfig)[barrelName] = { main: 'index'};
 });
 
 /** Type declaration for ambient System. */

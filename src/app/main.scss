@@ -20,6 +20,7 @@
 html{
 	-ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
+  background: #EAEBEC;
 }
 body {
     font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", "PingFangSC-Light", "Hiragino Sans GB", "MicrosoftYaHeiLight", "Microsoft Yahei", sans-serif;
@@ -35,4 +36,10 @@ a:hover {
 
 label {
     display: inline-block;
+}
+
+.slim-loading-bar-progress{
+  position: fixed;
+  top:0;
+  left:0;
 }
