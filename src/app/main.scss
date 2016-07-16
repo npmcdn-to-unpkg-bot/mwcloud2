@@ -4,24 +4,25 @@
 //@import 'core/overlay/overlay';
 //@import 'core/a11y/live-announcer';
 @import 'core/style/preloader';
+@import 'core/style/font-size';
 // * {
 //     -webkit-font-smoothing: antialiased;
 //     -moz-osx-font-smoothing: grayscale;
 // }
-
 @font-face {
-  src: url("/assets/fonts/roboto_regular_macroman/Roboto-Regular-webfont.eot");
-  src: url("/assets/fonts/roboto_regular_macroman/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/roboto_regular_macroman/Roboto-Regular-webfont.woff") format("woff"), url("/assets/fonts/roboto_regular_macroman/Roboto-Regular-webfont.ttf") format("truetype"), url("/assets/fonts/roboto_regular_macroman/Roboto-Regular-webfont.svg#robotoregular") format("svg");
-  font-family: "Roboto";
-  font-weight: normal;
-  font-style: normal; 
+    src: url("/assets/fonts/roboto_regular_macroman/Roboto-Regular-webfont.eot");
+    src: url("/assets/fonts/roboto_regular_macroman/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/roboto_regular_macroman/Roboto-Regular-webfont.woff") format("woff"), url("/assets/fonts/roboto_regular_macroman/Roboto-Regular-webfont.ttf") format("truetype"), url("/assets/fonts/roboto_regular_macroman/Roboto-Regular-webfont.svg#robotoregular") format("svg");
+    font-family: "Roboto";
+    font-weight: normal;
+    font-style: normal;
 }
 
-html{
-	-ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  background: #EAEBEC;
+html {
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    background: #EAEBEC;
 }
+
 body {
     font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", "PingFangSC-Light", "Hiragino Sans GB", "MicrosoftYaHeiLight", "Microsoft Yahei", sans-serif;
     font-size: 14px;
@@ -34,12 +35,13 @@ a:hover {
     text-decoration: none;
 }
 
-label {
-    display: inline-block;
+.slim-loading-bar-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 
-.slim-loading-bar-progress{
-  position: fixed;
-  top:0;
-  left:0;
+.c-header {
+    height: 80px;
+    padding:0 20px;
 }

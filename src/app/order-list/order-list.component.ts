@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MD_BUTTON_DIRECTIVES} from '@angular2-material/button';
+import {MdButton} from '@angular2-material/button';
 
 import { AuthService } from '@mw/core/services/auth.service';
 import { OrderService } from '@mw/core/services/order.service';
@@ -11,7 +11,7 @@ import { AppState } from '../app.state';
   templateUrl: 'order-list.component.html',
   styleUrls: ['order-list.component.css'],
   providers: [OrderService],
-  directives: [MD_BUTTON_DIRECTIVES]
+  directives: [MdButton]
 })
 export class OrderListComponent implements OnInit {
 

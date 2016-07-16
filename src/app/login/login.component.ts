@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MdCheckbox } from '@angular2-material/checkbox';
 
 import { AuthService } from '@mw/core/core';
 import { AuthModel } from '@mw/core/models/auth.model';
@@ -18,13 +19,13 @@ import { MwImageLoaderService } from '@mw/core/services/mw-image-loader.service'
         MwThemePreloader,
         MwImageLoaderService
     ],
-    directives: [],
+    directives: [MdCheckbox],
 })
 export class LoginComponent {
     model = new AuthModel("", "", true);
     constructor(
-        private _state: AppState, 
-        public authService: AuthService, 
+        private _state: AppState,
+        public authService: AuthService,
         public router: Router,
         private _imageLoader: MwImageLoaderService,
         private _spinner: MwThemeSpinner

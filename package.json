@@ -38,6 +38,8 @@
     "@angular/platform-browser-dynamic": "2.0.0-rc.4",
     "@angular/router": "3.0.0-alpha.8",
     "@angular2-material/button": "^2.0.0-alpha.6",
+    "@angular2-material/card": "^2.0.0-alpha.6",
+    "@angular2-material/checkbox": "^2.0.0-alpha.6",
     "@angular2-material/core": "^2.0.0-alpha.6",
     "@angular2-material/icon": "^2.0.0-alpha.6",
     "@angular2-material/list": "^2.0.0-alpha.6",
