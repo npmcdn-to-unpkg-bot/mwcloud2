@@ -20,10 +20,6 @@
       "@mw/core/*": [
         "./core/*",
         "../core/*"
-      ],
-      "@mw/*": [
-        "./components/*",
-        "../components/*"
       ]
     }
   },

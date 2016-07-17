@@ -3,7 +3,7 @@ import { Router, ROUTER_DIRECTIVES, Event, NavigationStart, NavigationEnd, Navig
 import { ToasterContainerComponent, ToasterService, ToasterConfig } from 'angular2-toaster/angular2-toaster';
 
 import { AppState } from '../app.state';
-import { AuthService } from '@mw/core/services/auth.service';
+import { AuthService } from '@mw/core/index';
 import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 
 @Component({

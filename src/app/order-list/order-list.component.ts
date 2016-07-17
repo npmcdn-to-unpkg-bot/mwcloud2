@@ -4,9 +4,9 @@ import {MdButton} from '@angular2-material/button';
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
-import { AuthService } from '@mw/core/services/auth.service';
-import { OrderService } from '@mw/core/services/order.service';
-import { OrderModel } from '@mw/core/models/order.model';
+import { AuthService } from '@mw/core/index';
+import { OrderService } from '@mw/core/index';
+import { OrderModel } from '@mw/core/index';
 import { AppState } from '../app.state';
 
 @Component({

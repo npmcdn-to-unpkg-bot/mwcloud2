@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { FormGroup, REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
-import { QuestionBase }     from '@mw/core/models/question-base';
+import { QuestionBase }     from '@mw/core/index';
 @Component({
 	moduleId: module.id,
   selector: 'df-question',

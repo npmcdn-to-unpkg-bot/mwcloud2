@@ -1,4 +1,4 @@
-import { OrderModel } from '@mw/core/models/order.model';
+import { OrderModel } from '@mw/core/index';
 describe('test tests', () => {
     it('true is true',
         () => expect(true).toEqual(true)

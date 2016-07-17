@@ -8,7 +8,7 @@ import { SlimLoadingBarService } from 'ng2-slim-loading-bar/ng2-slim-loading-bar
 import { environment } from './environment';
 import { MwAppComponent } from './mw-app/mw-app.component';
 import { MW_APP_ROUTER_PROVIDERS } from './mw-app/mw.app.routes';
-import { HttpService } from '@mw/core/services/http.service';
+import { HttpService } from '@mw/core/index';
 
 if (environment.production) {
     enableProdMode();

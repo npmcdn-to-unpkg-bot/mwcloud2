@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 //import { NgForm } from '@angular/common';
 
- import { OrderModel } from '@mw/core/models/order.model';
+ import { OrderModel } from '@mw/core/index';
  import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
- import { QuestionService } from '@mw/core/services/question.service';
+ import { QuestionService } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,

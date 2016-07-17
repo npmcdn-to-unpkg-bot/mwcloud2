@@ -2,8 +2,8 @@ import { Component, Input, OnInit }  from '@angular/core';
 import { FormGroup, REACTIVE_FORM_DIRECTIVES } from '@angular/forms';
 
 import { DynamicFormQuestionComponent } from '../dynamic-form-question/dynamic-form-question.component';
-import { QuestionBase }                 from '@mw/core/models/question-base';
-import { QuestionControlService }       from '@mw/core/services/question-control.service';
+import { QuestionBase }                 from '@mw/core/index';
+import { QuestionControlService }       from '@mw/core/index';
 @Component({
   moduleId: module.id,
   selector: 'dynamic-form',

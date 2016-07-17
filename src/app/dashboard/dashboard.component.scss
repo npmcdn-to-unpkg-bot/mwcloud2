@@ -1,10 +1,8 @@
+@import '../core/style/variables';
 .dashboard {
-    padding-top: 58px;
+    padding-top: $toolbar-height;
     padding-left: 230px;
     background: #EAEBEC;
-    md-toolbar {
-        z-index: 1;
-    }
     .mw-sidebar {
         width: 230px;
         position: fixed;
@@ -35,13 +33,15 @@
         min-height: 100vh;
         width: 100%;
         .mw-toolbar {
+            z-index: 1;
             background: white;
-            height: 58px;
+            height: $toolbar-height;
+            min-height: $toolbar-height;
             position: fixed;
             left: 230px;
             right: 0;
             top: 0;
-            box-shadow: 0 0 1px 1px rgba(0,0,0,.14),0 0 2px 2px rgba(0,0,0,.098),0 0 5px 1px rgba(0,0,0,.084);
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, .14), 0 0 2px 2px rgba(0, 0, 0, .098), 0 0 5px 1px rgba(0, 0, 0, .084);
         }
         .mw-content {}
     }

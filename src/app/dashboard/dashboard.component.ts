@@ -4,9 +4,9 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { MD_LIST_DIRECTIVES } from '@angular2-material/list/list';
 import { MdToolbar } from '@angular2-material/toolbar/toolbar';
 import { MdButton } from '@angular2-material/button/button';
-import { MwThemeSpinner } from '@mw/core/services/mw-theme-spinner.service';
-import { MwThemePreloader } from '@mw/core/services/mw-theme-preload.service';
-import { MwImageLoaderService } from '@mw/core/services/mw-image-loader.service';
+import { MwThemeSpinner } from '@mw/core/index';
+import { MwThemePreloader } from '@mw/core/index';
+import { MwImageLoaderService } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,

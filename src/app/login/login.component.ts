@@ -4,12 +4,12 @@ import { MdCheckbox } from '@angular2-material/checkbox';
 import { MdButton } from '@angular2-material/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
 
-import { AuthService } from '@mw/core/core';
-import { AuthModel } from '@mw/core/models/auth.model';
+import { AuthService } from '@mw/core/index';
+import { AuthModel } from '@mw/core/index';
 import { AppState } from '../app.state';
-import { MwThemeSpinner } from '@mw/core/services/mw-theme-spinner.service';
-import { MwThemePreloader } from '@mw/core/services/mw-theme-preload.service';
-import { MwImageLoaderService } from '@mw/core/services/mw-image-loader.service';
+import { MwThemeSpinner } from '@mw/core/index';
+import { MwThemePreloader } from '@mw/core/index';
+import { MwImageLoaderService } from '@mw/core/index';
 import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
 @Component({
