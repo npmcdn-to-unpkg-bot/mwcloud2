@@ -16,7 +16,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class HttpService {
-    constructor(private http: Http, private toasterService: ToasterService) {
+    constructor(private http: Http, private toaster_service: ToasterService) {
 
     }
 
@@ -36,11 +36,11 @@ export class HttpService {
                 let error_code = (error.code) ? error.code : error.status ? error.status : "500";
                 switch (error_code) {
                     case "120002":
-                        self.toasterService.pop('warning', 'Title', error_message);
+                        self.toaster_service.pop('warning', 'Title', error_message);
                         break;
                     case "500":
                     default:
-                        self.toasterService.pop('error', 'Title', error_message);
+                        self.toaster_service.pop('error', 'Title', error_message);
                         break;
                 }
                 return Observable.throw(error_message);
@@ -66,7 +66,7 @@ export class HttpService {
     //     let errMsg = (error.message) ? error.message :
     //         error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     //     console.error(errMsg); // log to console instead
-    //     this.toasterService.pop('error', 'Title', errMsg);
+    //     this.toaster_service.pop('error', 'Title', errMsg);
     //     return Observable.throw(errMsg);
     // }
 }

@@ -33,11 +33,20 @@
                 </div>
                 <md-list-item *ngFor="let item of order_list">
                     <div layout="row">
-                        <div flex="20">{{item.member.name}}</div>
+                        <div flex="20" layout="row">
+                            <div class="avatar-circle" flex-offset="5">
+                                <img [src]="item.member.avatar_path">
+                            </div>
+                            <div layout="column" layout-align="center start" flex-offset="5" flex>
+                                <span>{{item.member.name}}&nbsp;</span>
+                                <span>{{item.member.mobile}}&nbsp;</span>
+                                <span class="text-overflow">会员号:{{item.member.member_no}}&nbsp;</span>
+                            </div>
+                        </div>
                         <div flex="20">{{item.order_date}}</div>
                         <div flex="20"></div>
                         <div flex="10"></div>
-                        <div flex="10">{{item.receivable_money}}</div>
+                        <div flex="10">{{item.receivable_money | currency:'CNY':true:'1.2-2'}}</div>
                         <div flex="20"></div>
                     </div>
                 </md-list-item>

@@ -5,6 +5,7 @@ export class MemberModel extends BaseModel {
     name: string;
     mobile: string;
     avatar_id:number;
+    avatar_path:string;
     //constructor(id: number);
     constructor(id?: number, member_no?: string, name?: string, mobile?: string) {
         super(id);
@@ -27,6 +28,7 @@ export class MemberModel extends BaseModel {
         if(model.id || member_id){
         	member_model.id = model.id?model.id:member_id;
         	member_model.avatar_id = model.avatarId;
+            member_model.avatar_path = "http://newtest.mei1.com/api/file/"+model.avatarId;
         	member_model.member_no = model.memberNo;
         	member_model.name = model.name;
         	member_model.mobile = model.mobile;
@@ -34,6 +36,9 @@ export class MemberModel extends BaseModel {
         	//散客
         	member_model.id = 0;
         	member_model.name = "散客";
+        }
+        if(!member_model.avatar_id){
+            member_model.avatar_path = "assets/images/default_female.png";
         }
         
         return member_model;

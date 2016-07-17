@@ -17,6 +17,7 @@ export { MwThemeSpinner } from './services/mw-theme-spinner.service';
 export { OrderService } from './services/order.service';
 export { QuestionControlService } from './services/question-control.service';
 export { QuestionService } from './services/question.service';
+export { MoneyService } from './services/money.service';
 
 //directive
 export { HighlightDirective } from './directives/highlight.directive';

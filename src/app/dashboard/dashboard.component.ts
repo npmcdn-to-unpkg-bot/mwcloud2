@@ -27,8 +27,8 @@ import { MwImageLoaderService } from '@mw/core/index';
 })
 export class DashboardComponent {
     constructor(
-        private _imageLoader: MwImageLoaderService,
-        private _spinner: MwThemeSpinner
+        private image_loader: MwImageLoaderService,
+        private spinner: MwThemeSpinner
     ) {
         //this.loadImages();
     }
@@ -36,12 +36,12 @@ export class DashboardComponent {
     public ngAfterViewInit(): void {
         // hide spinner once all loaders are completed
         //MwThemePreloader.load().then((values) => {
-            this._spinner.hide();
+            this.spinner.hide();
         //});
     }
 
     private loadImages(): void {
         // register some loaders
-        MwThemePreloader.registerLoader(this._imageLoader.load('assets/images/login.jpg'));
+        MwThemePreloader.registerLoader(this.image_loader.load('assets/images/login.jpg'));
     }
 }

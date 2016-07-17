@@ -2,7 +2,6 @@ import { BaseModel } from './base.model';
 import { MemberModel } from './member.model';
 import { OrderType,OrderSource,OrderStatus } from '../enums/order.enum';
 
-
 export class OrderModel extends BaseModel {
     order_no: string;
     original_money:number;
@@ -56,9 +55,9 @@ export class OrderModel extends BaseModel {
         // );
         let order_model : OrderModel = new OrderModel();
         order_model.id = model.id;
-        order_model.original_money = model.originalMoney;
-        order_model.receivable_money = model.receivableMoney;
-        order_model.real_receivable_money = model.realReceivableMoney;
+        order_model.original_money = order_model.point2yuan(model.originalMoney);
+        order_model.receivable_money = order_model.point2yuan(model.receivableMoney);
+        order_model.real_receivable_money = order_model.point2yuan(model.realReceivableMoney);
         order_model.order_no = model.orderNo;
         order_model.pay_date = model.payDate;
         order_model.order_date = model.orderDate;

@@ -35,7 +35,7 @@ export class OrderListComponent implements OnInit {
   side_bar_state:string = 'show';
   order_list:OrderModel[] = [];
   list_total_count:number;
-  constructor(private order_service:OrderService,private auth_service:AuthService,private _state: AppState,private route: ActivatedRoute,private toasterService: ToasterService) {}
+  constructor(private order_service:OrderService,private auth_service:AuthService,private app_state: AppState,private route: ActivatedRoute,private toaster_service: ToasterService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -46,11 +46,11 @@ export class OrderListComponent implements OnInit {
               this.list_total_count = res.total_count;
               this.order_list = res.rows;
             },
-            (error) => {this.toasterService.pop("error", "Title", error);}
+            (error) => {this.toaster_service.pop("error", "Title", error);}
         );
   }
   btn_click(){
-    this._state.notifyDataChanged("alert.warn","button clicked");
+    this.app_state.notifyDataChanged("alert.warn","button clicked");
   }
 
   ngOnDestroy() {
