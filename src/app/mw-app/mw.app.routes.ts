@@ -23,7 +23,7 @@ export const routes: RouterConfig = [
             { path: 'index', component: IndexComponent },
             { path: 'button', component: ButtonComponent },
             { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
-            { path: 'order-list', component: OrderListComponent, canActivate: [AuthGuard] },
+            { path: 'order-list/:type', component: OrderListComponent, canActivate: [AuthGuard] },
             { path: 'register', component: RegisterComponent, canDeactivate: [CanDeactivateGuard] }
         ]
     }

@@ -42,6 +42,7 @@
     "@angular2-material/checkbox": "^2.0.0-alpha.6",
     "@angular2-material/core": "^2.0.0-alpha.6",
     "@angular2-material/icon": "^2.0.0-alpha.6",
+    "@angular2-material/input": "^2.0.0-alpha.6",
     "@angular2-material/list": "^2.0.0-alpha.6",
     "@angular2-material/toolbar": "^2.0.0-alpha.6",
     "angular2-toaster": "^0.3.6-rc.4",

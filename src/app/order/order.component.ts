@@ -18,7 +18,7 @@ export class OrderComponent {
     powers = ['Really Smart', 'Super Flexible',
         'Super Hot', 'Weather Changer'
     ];
-    model = new OrderModel(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
+    //model = new OrderModel(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
     submitted = false;
 
     constructor(service: QuestionService) {
@@ -31,9 +31,9 @@ export class OrderComponent {
         // to be removed/re-added in a tick via NgIf
         // TODO: Workaround until NgForm has a reset method (#6822)
     active = true;
-    newHero() {
-        this.model = new OrderModel(42, '', '');
-        this.active = false;
-        setTimeout(() => this.active = true, 0);
-    }
+    // newHero() {
+    //     this.model = new OrderModel(42, '', '');
+    //     this.active = false;
+    //     setTimeout(() => this.active = true, 0);
+    // }
 }

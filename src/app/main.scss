@@ -5,6 +5,7 @@
 //@import 'core/a11y/live-announcer';
 @import 'core/style/preloader';
 @import 'core/style/font-size';
+@import 'core/style/color-const';
 // * {
 //     -webkit-font-smoothing: antialiased;
 //     -moz-osx-font-smoothing: grayscale;
@@ -20,14 +21,17 @@
 html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-    background: #EAEBEC;
+    background: $body-bg;
 }
 
+html,
 body {
     font-family: "Roboto", "Helvetica Neue", "Helvetica", "Arial", "PingFangSC-Light", "Hiragino Sans GB", "MicrosoftYaHeiLight", "Microsoft Yahei", sans-serif;
     font-size: 14px;
     line-height: 1.5;
-    color: rgba(0, 0, 0, 0.7);
+    color: $default-text;
+    margin: 0;
+    padding: 0;
 }
 
 a,
@@ -35,13 +39,72 @@ a:hover {
     text-decoration: none;
 }
 
+md-list {
+    padding-top:0!important;
+    .list-header {
+        text-align: center;
+        padding:10px 0;
+        background:#f8f8f8;
+        //border-bottom: 1px solid #f8f8f8;
+    }
+    md-list-item {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+    }
+    md-list-item:hover {
+        background: #f5f5f6;
+    }
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
 .slim-loading-bar-progress {
+    z-index: 999;
     position: fixed;
     top: 0;
     left: 0;
 }
 
 .c-header {
-    height: 80px;
-    padding:0 20px;
+    height: 60px;
+}
+
+.mw-header,
+.mw-tab-header {
+    background: $mw-primary;
+    color: #fff;
+}
+
+.mw-tab-header {
+    .link-wrap {
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+}
+
+.mw-tab-query {
+    padding: 10px 20px;
+    .query-label {
+        @extend .mw-fs-12;
+        color: $label-text;
+    }
+}
+
+.mw-header {
+    padding: 10px 10px;
+}
+
+.mw-click {
+    cursor: pointer;
+}
+
+.side-bar {
+    margin-top: 12px;
 }

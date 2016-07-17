@@ -28,11 +28,19 @@
         .form-title {
             border-bottom: none;
             text-align: center;
+            display: block;
+            width: 100%;
+            padding: 0;
+            margin-bottom: 20px;
+            font-size: 21px;
+            line-height: inherit;
+            color: #333;
+            border: 0;
         }
-        .button-block{
-            width:100%;
+        .button-block {
+            width: 100%;
         }
-        .login-action{
+        .login-action {
             height: 41px;
             line-height: 41px;
         }
@@ -43,8 +51,8 @@
         right: 0;
         text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
         transform: translateY(3em);
-        a{
-        	color: #fff;
+        a {
+            color: #fff;
         }
     }
 }

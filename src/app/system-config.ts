@@ -34,7 +34,8 @@ const materialPkgs:string[] = [
   'list',
   'toolbar',
   'card',
-  'checkbox'
+  'checkbox',
+  'input'
 ];
 materialPkgs.forEach((pkg) => {
   packages[`@angular2-material/${pkg}`] = {main: `${pkg}.js`};
