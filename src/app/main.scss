@@ -40,6 +40,10 @@ a:hover {
     text-decoration: none;
 }
 
+md-card{
+    color:inherit!important;
+}
+
 md-list {
     padding-top: 0!important;
     .list-header {
@@ -124,4 +128,10 @@ md-list {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.icon-female{
+    color:$female;
+}
+.icon-male{
+    color:$male;
 }

@@ -24,3 +24,7 @@ export { HighlightDirective } from './directives/highlight.directive';
 
 //piper
 export { MyUppercasePipe } from './pipes/my-uppercase';
+
+//enum
+export { GenderType } from './enums/mw.enum';
+export { OrderType,OrderSource,OrderStatus } from './enums/order.enum';

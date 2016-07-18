@@ -8,10 +8,10 @@
         <md-card class="no-padding">
             <div layout="row" layout-align="start center" class="mw-tab-header">
                 <div class="link-wrap order-link" layout="row" layout-align="start center">
-                    <a [routerLink]="['/dashboard/order-list/1']" [ngClass]="{selected: order_type==1}">待付款</a>
-                    <a [routerLink]="['/dashboard/order-list/2']" [ngClass]="{selected: order_type==2}">已付款</a>
-                    <a [routerLink]="['/dashboard/order-list/3']" [ngClass]="{selected: order_type==3}">尾款单</a>
-                    <a [routerLink]="['/dashboard/order-list/4']" [ngClass]="{selected: order_type==4}">历史订单</a>
+                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.unpaid]" [class.selected]="order_type==OrderStatusEnum.unpaid">待付款</a>
+                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.paid]" [ngClass]="{selected: order_type==OrderStatusEnum.paid}">已付款</a>
+                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.paidLeft]" [ngClass]="{selected: order_type==OrderStatusEnum.paidLeft}">尾款单</a>
+                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.history]" [ngClass]="{selected: order_type==OrderStatusEnum.history}">历史订单</a>
                 </div>
                 <div flex layout="row" layout-align="end center">
                     <i (click)="side_bar_state=='collapse'?side_bar_state='show':side_bar_state='collapse'" class="fa fa-bars mw-click mw-fs-18 side-bar-button"></i>
@@ -38,16 +38,25 @@
                                 <img [src]="item.member.avatar_path">
                             </div>
                             <div layout="column" layout-align="center start" flex-offset="5" flex>
-                                <span>{{item.member.name}}&nbsp;</span>
-                                <span>{{item.member.mobile}}&nbsp;</span>
-                                <span class="text-overflow">会员号:{{item.member.member_no}}&nbsp;</span>
+                                <strong class="mw-fs-14 member-name">
+                                    {{item.member.name}}&nbsp;
+                                    <span [ngSwitch]="item.member.gender">
+                                        <i *ngSwitchCase="GenderTypeEnum.female" class="fa fa-venus icon-female"></i>
+                                        <i *ngSwitchCase="GenderTypeEnum.male" class="fa fa-mars icon-male"></i>
+                                        <i *ngSwitchDefault class="fa fa-venus icon-female"></i>
+                                    </span>
+                                </strong>
+                                <span>{{item.member.mobile}}</span>
+                                <span *ngIf="item.member.member_no" class="text-overflow">
+                                    会员号:{{item.member.member_no}}
+                                </span>
                             </div>
                         </div>
                         <div flex="20">{{item.order_date}}</div>
-                        <div flex="20"></div>
-                        <div flex="10"></div>
+                        <div flex="20">{{item.receivable_money}}</div>
+                        <div flex="10">{{item.receivable_money}}</div>
                         <div flex="10">{{item.receivable_money | currency:'CNY':true:'1.2-2'}}</div>
-                        <div flex="20"></div>
+                        <div flex="20">{{item.receivable_money}}</div>
                     </div>
                 </md-list-item>
             </md-list>

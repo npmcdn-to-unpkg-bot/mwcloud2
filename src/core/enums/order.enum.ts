@@ -11,5 +11,6 @@ export enum OrderSource{
 export enum OrderStatus{
     unpaid = 11,//待支付
     paid = 20,//已支付
- 	paidLeft = 40//尾款
+ 	paidLeft = 40,//尾款
+ 	history = 41//历史订单
 }

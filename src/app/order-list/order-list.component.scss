@@ -10,6 +10,9 @@
     	.side-bar-button{
     		margin-right:20px;
     	}
+        .member-name{
+            color: $male;
+        }
     }
     .triangle {
         @include triangle(right, 12px, #000);

@@ -7,6 +7,8 @@ import { ToasterService } from 'angular2-toaster/angular2-toaster';
 import { AuthService } from '@mw/core/index';
 import { OrderService } from '@mw/core/index';
 import { OrderModel } from '@mw/core/index';
+import { GenderType } from '@mw/core/index';
+import { OrderType,OrderSource,OrderStatus } from '@mw/core/index';
 import { AppState } from '../app.state';
 
 @Component({
@@ -31,10 +33,14 @@ import { AppState } from '../app.state';
 })
 export class OrderListComponent implements OnInit {
   private sub: any;
-  order_type:number;
-  side_bar_state:string = 'show';
-  order_list:OrderModel[] = [];
-  list_total_count:number;
+  private GenderTypeEnum = GenderType;
+  private OrderTypeEnum = OrderType;
+  private OrderSourceEnum = OrderSource;
+  private OrderStatusEnum = OrderStatus;
+  private order_type:number;
+  private side_bar_state:string = 'show';
+  private order_list:OrderModel[] = [];
+  private list_total_count:number;
   constructor(private order_service:OrderService,private auth_service:AuthService,private app_state: AppState,private route: ActivatedRoute,private toaster_service: ToasterService) {}
 
   ngOnInit() {

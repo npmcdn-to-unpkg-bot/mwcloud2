@@ -19,6 +19,7 @@
     "gridism": "^0.2.2",
     "material-color": "^2.2.1",
     "material-design-icons": "^2.2.3",
-    "font-awesome": "^4.6.3"
+    "font-awesome": "^4.6.3",
+    "intl": "^1.2.4"
   }
 }

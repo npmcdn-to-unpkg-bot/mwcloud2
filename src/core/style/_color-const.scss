@@ -1,4 +1,4 @@
-$default: rgba(0,0,0,0.87); // default colors for layout
+$default: rgba(0,0,0,0.67); // default colors for layout
 $body-bg: #EAEBEC; // default bg color
 
 $default-text: $default; // default text color layout (usually is the same as $default)
@@ -63,6 +63,8 @@ $hoverlink: darken($activelink, 20%);
 
 //mw colors
 $mw-primary: #B54DCE;
+$female:#F37298;
+$male:#4A90E2;
 
 // main background
 // @mixin body-bg() {

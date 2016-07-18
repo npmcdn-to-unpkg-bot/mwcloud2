@@ -1,9 +1,11 @@
-import { BaseModel } from './base.model'
+import { BaseModel } from './base.model';
+import { GenderType } from '../enums/mw.enum';
 
 export class MemberModel extends BaseModel {
     member_no: string;
     name: string;
     mobile: string;
+    gender:GenderType;
     avatar_id:number;
     avatar_path:string;
     //constructor(id: number);
@@ -32,6 +34,7 @@ export class MemberModel extends BaseModel {
         	member_model.member_no = model.memberNo;
         	member_model.name = model.name;
         	member_model.mobile = model.mobile;
+            member_model.gender = +model.gender;
         }else{
         	//散客
         	member_model.id = 0;
@@ -39,6 +42,9 @@ export class MemberModel extends BaseModel {
         }
         if(!member_model.avatar_id){
             member_model.avatar_path = "assets/images/default_female.png";
+        }
+        if(!member_model.gender){
+            member_model.gender = GenderType.female;
         }
         
         return member_model;

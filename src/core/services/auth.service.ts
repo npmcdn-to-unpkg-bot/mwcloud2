@@ -20,6 +20,7 @@ export class AuthService {
     permission_code_list: any[] = [];
     permission_store_list: any[] = [];
     constructor(private http_service: HttpService, private window: Window) {}
+    //constructor(private http_service: HttpService) {}
 
     public login(model: AuthModel) {
         let data = {

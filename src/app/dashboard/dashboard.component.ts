@@ -7,6 +7,7 @@ import { MdButton } from '@angular2-material/button/button';
 import { MwThemeSpinner } from '@mw/core/index';
 import { MwThemePreloader } from '@mw/core/index';
 import { MwImageLoaderService } from '@mw/core/index';
+import { OrderStatus } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,
@@ -26,6 +27,7 @@ import { MwImageLoaderService } from '@mw/core/index';
     ]
 })
 export class DashboardComponent {
+    private OrderStatusEnum = OrderStatus;
     constructor(
         private image_loader: MwImageLoaderService,
         private spinner: MwThemeSpinner

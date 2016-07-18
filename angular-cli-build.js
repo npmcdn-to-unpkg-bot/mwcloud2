@@ -95,7 +95,8 @@ function _buildAppTree(defaults) {
       'vendor/core-js/client/core.js',
       'vendor/systemjs/dist/system.src.js',
       'vendor/zone.js/dist/zone.js',
-      'vendor/hammerjs/hammer.min.js'
+      'vendor/hammerjs/hammer.min.js',
+      'vendor/intl/dist/intl.min.js'
     ],
     tsCompiler: {},
     sassCompiler: {
@@ -118,7 +119,8 @@ function _buildAppTree(defaults) {
       'material-design-icons-iconfont/dist/**/*',
       'font-awesome/**/*',
       'angular2-toaster/**/*',
-      'ng2-slim-loading-bar/**/*.+(ts|js|js.map)'
+      'ng2-slim-loading-bar/**/*.+(ts|js|js.map)',
+      'intl/dist/*.min.+(js|js.map)'
     ]
   });
 }
