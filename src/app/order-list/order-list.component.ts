@@ -10,8 +10,8 @@ import { OrderService } from '@mw/core/index';
 import { OrderModel } from '@mw/core/index';
 import { GenderType } from '@mw/core/index';
 import { OrderType, OrderSource, OrderStatus } from '@mw/core/index';
-import { BasePageComponent } from '@mw/core/index';
-import { AppState } from '../app.state';
+import { PageBaseComponent } from '@mw/core/index';
+import { EventBus } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,
@@ -34,7 +34,7 @@ import { AppState } from '../app.state';
         ])
     ]
 })
-export class OrderListComponent extends BasePageComponent implements OnInit {
+export class OrderListComponent extends PageBaseComponent implements OnInit {
     private sub: any;
     private GenderTypeEnum = GenderType;
     private OrderTypeEnum = OrderType;
@@ -44,7 +44,7 @@ export class OrderListComponent extends BasePageComponent implements OnInit {
     private sideBarState: string = 'show';
     private orderList: OrderModel[] = [];
 
-    constructor(private orderService: OrderService, private authService: AuthService, private appState: AppState, private route: ActivatedRoute, private toasterService: ToasterService) {
+    constructor(private orderService: OrderService, private authService: AuthService, private eventBus: EventBus, private route: ActivatedRoute, private toasterService: ToasterService) {
       super();
     }
 
@@ -53,9 +53,10 @@ export class OrderListComponent extends BasePageComponent implements OnInit {
             this.orderType = +params['type']; // (+) converts string 'id' to a number
         });
         this.getPage(this.paginationConfig.currentPage);
+        this.eventBus.notifyDataChanged("menu.select", "order-list");
     }
     btnClick() {
-        this.appState.notifyDataChanged("alert.warn", "button clicked");
+        this.eventBus.notifyDataChanged("alert.warn", "button clicked");
     }
 
     getPage(page: number) {

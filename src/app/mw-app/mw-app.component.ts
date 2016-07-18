@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { ToasterContainerComponent, ToasterService, ToasterConfig } from 'angular2-toaster/angular2-toaster';
 
-import { AppState } from '../app.state';
+import { EventBus } from '@mw/core/index';
 import { AuthService } from '@mw/core/index';
 import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 
@@ -10,7 +10,7 @@ import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-
     moduleId: module.id,
     selector: 'mw-app',
     providers: [
-        AppState
+        EventBus
     ],
     templateUrl: 'mw-app.component.html',
     styleUrls: ['mw-app.component.css'],
@@ -32,7 +32,7 @@ export class MwAppComponent {
     constructor(
         private toasterService: ToasterService,
         private slimLoader: SlimLoadingBarService,
-        private appState: AppState,
+        private eventBus: EventBus,
         private authService: AuthService,
         private router: Router,
         private window: Window
@@ -60,7 +60,7 @@ export class MwAppComponent {
         });
 
         //alert event subscribe
-        this.appState.subscribe('alert.warn', (message: string) => {
+        this.eventBus.subscribe('alert.warn', (message: string) => {
              this.toasterService.pop('success', 'success', message);
              this.toasterService.pop('warning', 'warning', message);
              this.toasterService.pop('info', 'info', message);

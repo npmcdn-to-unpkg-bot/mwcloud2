@@ -1,5 +1,4 @@
 import { MoneyService } from '../services/money.service';
-import { IPaginationInstance } from 'ng2-pagination';
 
 export class BaseModel {
    id: number;
@@ -13,15 +12,4 @@ export class BaseModel {
     	return MoneyService.yuan2point(value);
     }
 }
-export class BaseComponent{
 
-}
-
-export class BasePageComponent extends BaseComponent {
-  paginationConfig:IPaginationInstance = {
-        //id: 'custom',
-        itemsPerPage: 10,
-        currentPage: 1,
-        totalItems:0
-    };
-}

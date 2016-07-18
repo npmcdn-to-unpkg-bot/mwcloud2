@@ -8,6 +8,7 @@ import { MwThemeSpinner } from '@mw/core/index';
 import { MwThemePreloader } from '@mw/core/index';
 import { MwImageLoaderService } from '@mw/core/index';
 import { OrderStatus } from '@mw/core/index';
+import { EventBus } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,
@@ -28,11 +29,18 @@ import { OrderStatus } from '@mw/core/index';
 })
 export class DashboardComponent {
     private OrderStatusEnum = OrderStatus;
+    selectedMenu:string = "order";
     constructor(
         private imageLoader: MwImageLoaderService,
-        private spinner: MwThemeSpinner
+        private spinner: MwThemeSpinner,
+        private eventBus :EventBus
     ) {
         //this.loadImages();
+        
+        //menu select subscribe
+        this.eventBus.subscribe('menu.select', (menuName: string) => {
+             this.selectedMenu = menuName;
+        });
     }
 
     public ngAfterViewInit(): void {

@@ -3,6 +3,12 @@
     padding-top: $toolbar-height;
     padding-left: 230px;
     background: #EAEBEC;
+    md-toolbar {
+        padding: 0;
+        md-toolbar-row {
+            height: $toolbar-height;
+        }
+    }
     .mw-sidebar {
         width: 230px;
         position: fixed;
@@ -24,6 +30,7 @@
                 margin-right: 13px;
             }
         }
+        .menu-item.selected,
         .menu-item:hover {
             color: #fff;
             background: #24272d;
@@ -42,6 +49,7 @@
             right: 0;
             top: 0;
             box-shadow: 0 0 1px 1px rgba(0, 0, 0, .14), 0 0 2px 2px rgba(0, 0, 0, .098), 0 0 5px 1px rgba(0, 0, 0, .084);
+            opacity: 0.9;
         }
         .mw-content {}
     }

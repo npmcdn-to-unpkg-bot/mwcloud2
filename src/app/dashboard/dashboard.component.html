@@ -7,11 +7,11 @@
                 <i class="fa fa-user"></i>
                 <span>Login</span>
             </a>
-            <a [routerLink]="['/dashboard/order']" class="menu-item">
+            <a [routerLink]="['/dashboard/order']" class="menu-item" [class.selected]="selectedMenu=='order'">
                 <i class="fa fa-user"></i>
                 <span>Order</span>
             </a>
-            <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.UNPAID]" class="menu-item">
+            <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.UNPAID]" class="menu-item" [class.selected]="selectedMenu=='order-list'">
                 <i class="fa fa-user"></i>
                 <span>Order List</span>
             </a>
