@@ -1,7 +1,16 @@
 @import '../core/style/variables';
+$side-menu-width:230px;
+$side-menu-width-small: 60px;
+.dashboard.small {
+    padding-left: $side-menu-width-small;
+}
+
+.dashboard,.mw-sidebar,md-toolbar{
+    transition: all 0.2s;
+}
 .dashboard {
     padding-top: $toolbar-height;
-    padding-left: 230px;
+    padding-left: $side-menu-width;
     background: #EAEBEC;
     md-toolbar {
         padding: 0;
@@ -10,13 +19,19 @@
         }
     }
     .mw-sidebar {
-        width: 230px;
+        width: $side-menu-width;
         position: fixed;
         left: 0;
         top: 0;
         height: 100vh;
         background: #2b333d;
         md-toolbar {
+            md-toolbar-row {
+                text-align: center;
+                i {
+                    color: #fff;
+                }
+            }
             background: #2b333d;
         }
         .menu-item {
@@ -36,6 +51,9 @@
             background: #24272d;
         }
     }
+    .mw-sidebar.small {
+        width: $side-menu-width-small;
+    }
     .mw-body {
         min-height: 100vh;
         width: 100%;
@@ -45,11 +63,14 @@
             height: $toolbar-height;
             min-height: $toolbar-height;
             position: fixed;
-            left: 230px;
+            left: $side-menu-width;
             right: 0;
             top: 0;
             box-shadow: 0 0 1px 1px rgba(0, 0, 0, .14), 0 0 2px 2px rgba(0, 0, 0, .098), 0 0 5px 1px rgba(0, 0, 0, .084);
             opacity: 0.9;
+        }
+        .mw-toolbar.small {
+            left: $side-menu-width-small;
         }
         .mw-content {}
     }

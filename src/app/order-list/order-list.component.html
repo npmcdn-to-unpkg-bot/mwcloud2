@@ -14,7 +14,7 @@
                     <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.HISTORY]" [ngClass]="{selected: orderType==OrderStatusEnum.HISTORY}">历史订单</a>
                 </div>
                 <div flex layout="row" layout-align="end center">
-                    <i (click)="side_bar_state=='collapse'?side_bar_state='show':side_bar_state='collapse'" class="fa fa-bars mw-click mw-fs-18 side-bar-button"></i>
+                    <i (click)="sideBarState=='collapse'?sideBarState='show':sideBarState='collapse'" class="fa fa-bars mw-click mw-fs-18 side-bar-button"></i>
                 </div>
             </div>
             <div class="mw-tab-query">
@@ -65,7 +65,7 @@
             </div>
         </md-card>
     </div>
-    <md-card flex="20" class="side-bar no-padding" @sideBarState="sideBarState">
+    <md-card class="side-bar no-padding" @sideBarState="sideBarState">
         <div class="mw-header">$ 当前营业收入</div>
     </md-card>
 </div>

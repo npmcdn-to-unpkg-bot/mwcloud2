@@ -1,25 +1,28 @@
-<div class="dashboard">
-    <div class="mw-sidebar">
+<div class="dashboard" [class.small]="sideMenuState=='small'">
+    <div class="mw-sidebar" [class.small]="sideMenuState=='small'">
         <md-toolbar>
+            <div flex layout="row" layout-align="center center">
+                <i (click)="sideMenuState=='small'?sideMenuState='large':sideMenuState='small'" class="fa fa-bars mw-click mw-fs-18 mw-white"></i>
+            </div>
         </md-toolbar>
         <md-nav-list>
             <a [routerLink]="['/login']" class="menu-item">
-                <i class="fa fa-user"></i>
-                <span>Login</span>
+                <nobr><i class="fa fa-user"></i>
+                <span *ngIf="sideMenuState=='large'">Login</span></nobr>
             </a>
             <a [routerLink]="['/dashboard/order']" class="menu-item" [class.selected]="selectedMenu=='order'">
-                <i class="fa fa-user"></i>
-                <span>Order</span>
+                 <nobr><i class="fa fa-user"></i>
+                <span *ngIf="sideMenuState=='large'">Order</span></nobr>
             </a>
             <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.UNPAID]" class="menu-item" [class.selected]="selectedMenu=='order-list'">
-                <i class="fa fa-user"></i>
-                <span>Order List</span>
+                 <nobr><i class="fa fa-user"></i>
+                <span *ngIf="sideMenuState=='large'">Order List</span></nobr>
             </a>
         </md-nav-list>
         <!-- <button md-button (click)="start.close()">CLOSE</button> -->
     </div>
     <div class="mw-body">
-        <md-toolbar class="mw-toolbar">
+        <md-toolbar class="mw-toolbar" [class.small]="sideMenuState=='small'">
         </md-toolbar>
         <div class="mw-content">
             <router-outlet></router-outlet>

@@ -24,13 +24,16 @@ import { EventBus } from '@mw/core/index';
     animations: [
         trigger('sideBarState', [
             state('collapse', style({
-                display: 'none'
+                //display: 'none'
+                width:"0%",
+                maxWidth:"0%"
             })),
             state('show', style({
-                display: 'block'
+                //display: 'block'
+                width:'20%'
             })),
-            //transition('collapse => show', animate('300ms ease-in')),
-            //transition('show => collapse', animate('300ms ease-out'))
+            transition('collapse => show', animate('200ms')),
+            transition('show => collapse', animate('200ms'))
         ])
     ]
 })

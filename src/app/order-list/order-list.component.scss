@@ -1,6 +1,11 @@
 @import '../core/style/mixins';
 @import '../core/style/color-const';
+@import '../core/style/variables';
+
 .order-list-component {
+    // .order-content,.side-bar{
+    //     transition: all 0.2s;
+    // }
 	md-card{
 		margin-bottom:10px;
 	}
@@ -25,6 +30,13 @@
         a.selected {
             background: #fff;
             color:$default-text;
+        }
+    }
+    .side-bar{
+        width:$side-bar-width;
+        overflow-x: hidden;
+        div{
+            min-width: $side-bar-width;
         }
     }
 }

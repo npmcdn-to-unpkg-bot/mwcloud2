@@ -30,6 +30,7 @@ import { EventBus } from '@mw/core/index';
 export class DashboardComponent {
     private OrderStatusEnum = OrderStatus;
     selectedMenu:string = "order";
+    sideMenuState:string = "large";
     constructor(
         private imageLoader: MwImageLoaderService,
         private spinner: MwThemeSpinner,
