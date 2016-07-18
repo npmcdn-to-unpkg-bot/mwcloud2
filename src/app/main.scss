@@ -71,6 +71,13 @@ md-list {
     margin: 0;
 }
 
+.mw-pagination{
+    padding-bottom:1px;
+    text-align:center;
+    ul{
+        padding-left:0;
+    }
+}
 .slim-loading-bar-progress {
     z-index: 999;
     position: fixed;

@@ -3,15 +3,15 @@
         <header class="c-header" layout="row" layout-align="space-between center">
             <span class="mw-fs-24">订单列表</span>
             <!-- <div class="triangle"></div> -->
-            <button md-raised-button color="primary" (click)="btn_click()">primary</button>
+            <button md-raised-button color="primary" (click)="btnClick()">primary</button>
         </header>
         <md-card class="no-padding">
             <div layout="row" layout-align="start center" class="mw-tab-header">
                 <div class="link-wrap order-link" layout="row" layout-align="start center">
-                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.unpaid]" [class.selected]="order_type==OrderStatusEnum.unpaid">待付款</a>
-                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.paid]" [ngClass]="{selected: order_type==OrderStatusEnum.paid}">已付款</a>
-                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.paidLeft]" [ngClass]="{selected: order_type==OrderStatusEnum.paidLeft}">尾款单</a>
-                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.history]" [ngClass]="{selected: order_type==OrderStatusEnum.history}">历史订单</a>
+                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.UNPAID]" [class.selected]="orderType==OrderStatusEnum.UNPAID">待付款</a>
+                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.PAID]" [ngClass]="{selected: orderType==OrderStatusEnum.PAID}">已付款</a>
+                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.PAID_LEFT]" [ngClass]="{selected: orderType==OrderStatusEnum.PAID_LEFT}">尾款单</a>
+                    <a [routerLink]="['/dashboard/order-list/'+OrderStatusEnum.HISTORY]" [ngClass]="{selected: orderType==OrderStatusEnum.HISTORY}">历史订单</a>
                 </div>
                 <div flex layout="row" layout-align="end center">
                     <i (click)="side_bar_state=='collapse'?side_bar_state='show':side_bar_state='collapse'" class="fa fa-bars mw-click mw-fs-18 side-bar-button"></i>
@@ -25,13 +25,13 @@
             <md-list>
                 <div class="list-header" layout="row">
                     <span flex="20">会员信息</span>
-                    <span flex="20">流水号/下单时间</span>
+                    <span flex="20">下单时间</span>
                     <span flex="20">订单内容</span>
                     <span flex="10">服务人员</span>
                     <span flex="10">应收金额</span>
                     <span flex="20">操作</span>
                 </div>
-                <md-list-item *ngFor="let item of order_list">
+                <md-list-item *ngFor="let item of orderList | paginate: paginationConfig">
                     <div layout="row">
                         <div flex="20" layout="row">
                             <div class="avatar-circle" flex-offset="5">
@@ -53,16 +53,19 @@
                             </div>
                         </div>
                         <div flex="20">{{item.order_date}}</div>
-                        <div flex="20">{{item.receivable_money}}</div>
-                        <div flex="10">{{item.receivable_money}}</div>
+                        <div flex="20"></div>
+                        <div flex="10"></div>
                         <div flex="10">{{item.receivable_money | currency:'CNY':true:'1.2-2'}}</div>
-                        <div flex="20">{{item.receivable_money}}</div>
+                        <div flex="20"></div>
                     </div>
                 </md-list-item>
             </md-list>
+            <div class="mw-pagination">
+                <pagination-controls (pageChange)="getPage($event)" maxSize="9"></pagination-controls>
+            </div>
         </md-card>
     </div>
-    <md-card flex="20" class="side-bar no-padding" @sideBarState="side_bar_state">
+    <md-card flex="20" class="side-bar no-padding" @sideBarState="sideBarState">
         <div class="mw-header">$ 当前营业收入</div>
     </md-card>
 </div>

@@ -15,37 +15,37 @@ import { HttpService } from './http.service';
 
 @Injectable()
 export class AuthService {
-    is_login_in: boolean = false;
-    emp_info: any;
-    permission_code_list: any[] = [];
-    permission_store_list: any[] = [];
-    constructor(private http_service: HttpService, private window: Window) {}
-    //constructor(private http_service: HttpService) {}
+    isLogin: boolean = false;
+    empInfo: any;
+    permissionCodeList: any[] = [];
+    permissionStoreList: any[] = [];
+    constructor(private httpService: HttpService, private window: Window) {}
+    //constructor(private httpService: HttpService) {}
 
     public login(model: AuthModel) {
         let data = {
-            username: model.user_name,
+            username: model.userName,
             password: this.base64encode(model.password),
             rememberMe: model.remember
         };
-        return this.http_service.request('/api/auth/form', 'post', data)
+        return this.httpService.request('/api/auth/form', 'post', data)
             // .map((res)=>{
             //     debugger;
             //     self.get_employee_list(res,self);
             // })
-            .switchMap((res) => this.get_employee_list(res))
+            .switchMap((res) => this.getEmployeeList(res))
             .catch((error: any) => {
-                this.is_login_in = false;
+                this.isLogin = false;
                 return Observable.throw(error);
             });
-        //return Observable.of(true).delay(1000).do(val => this.is_login_in = true);
+        //return Observable.of(true).delay(1000).do(val => this.isLogin = true);
     }
 
     public logout() {
-        this.is_login_in = false;
+        this.isLogin = false;
     }
 
-    public get_permission(emp_id: string) {
+    public getPermission(empId: string) {
         // var timer1 = Observable.interval(1000).take(10);
         // var timer2 = Observable.interval(2000).take(6);
         // var timer3 = Observable.interval(500).take(10);
@@ -53,10 +53,10 @@ export class AuthService {
         // //var merged = Observable.merge(timer1, timer2, timer3, concurrent);
         // var merged = Observable.merge(timer1,timer3,1);
         // merged.subscribe(x => console.log(x));
-        return Observable.merge(this.get_permission_store_list(emp_id), this.get_permissions(emp_id))
+        return Observable.merge(this.getPermissionStoreList(empId), this.getPermissions(empId))
             .reduce((res1: any[], res2: any[]) => {
-                this.permission_store_list = res1;
-                this.permission_code_list = res2;
+                this.permissionStoreList = res1;
+                this.permissionCodeList = res2;
                 return null;
             })
             .catch((error: any) => {
@@ -64,67 +64,67 @@ export class AuthService {
             });
     }
 
-    private get_permissions(emp_id: string) {
-        return this.http_service.request('/api/employee/permissions/' + emp_id, 'get', null)
+    private getPermissions(empId: string) {
+        return this.httpService.request('/api/employee/permissions/' + empId, 'get', null)
             .map((res) => {
-                this.is_login_in = true;
+                this.isLogin = true;
                 return res;
             })
             .catch((error: any) => {
-                this.is_login_in = false;
+                this.isLogin = false;
                 return Observable.throw(error);
             });
     }
 
-    private get_employee_list(user_id: string) {
-        return this.http_service.request('/api/employee/list/account/' + user_id, 'get', null)
-            .switchMap((res) => this.employee_login(res))
+    private getEmployeeList(userId: string) {
+        return this.httpService.request('/api/employee/list/account/' + userId, 'get', null)
+            .switchMap((res) => this.employeeLogin(res))
             .catch((error: any) => {
-                this.is_login_in = false;
+                this.isLogin = false;
                 return Observable.throw(error);
             });
     }
 
-    private employee_login(emp_list: any) {
-        let emp_id: number = null;
-        if (emp_list && emp_list.length > 0) {
-            emp_id = emp_list[0].id;
-            this.emp_info = emp_list[0];
-            this.emp_info = {
-                emp_id: emp_list[0].id,
-                emp_name: emp_list[0].name
+    private employeeLogin(empList: any) {
+        let empId: number = null;
+        if (empList && empList.length > 0) {
+            empId = empList[0].id;
+            this.empInfo = empList[0];
+            this.empInfo = {
+                empId: empList[0].id,
+                emp_name: empList[0].name
             };
-            if (emp_list[0].merchant) {
-                this.emp_info.mch_id = emp_list[0].merchant.id;
-                this.emp_info.mch_name = emp_list[0].merchant.name;
+            if (empList[0].merchant) {
+                this.empInfo.mchId = empList[0].merchant.id;
+                this.empInfo.mchName = empList[0].merchant.name;
             }
-            if (emp_list[0].store) {
-                this.emp_info.store_id = emp_list[0].store.id;
-                this.emp_info.store_name = emp_list[0].store.name;
+            if (empList[0].store) {
+                this.empInfo.storeId = empList[0].store.id;
+                this.empInfo.storeName = empList[0].store.name;
             }
-            this.window.localStorage.setItem('emp_info', JSON.stringify(this.emp_info));
+            this.window.localStorage.setItem('emp_info', JSON.stringify(this.empInfo));
         } else {
             return Observable.throw("获取员工身份失败");
         }
 
-        return this.http_service.request('/api/employee/login/' + emp_id, 'put', null)
+        return this.httpService.request('/api/employee/login/' + empId, 'put', null)
             .map((res) => {
-                this.is_login_in = true;
+                this.isLogin = true;
                 return res;
             })
             .catch((error: any) => {
-                this.is_login_in = false;
+                this.isLogin = false;
                 return Observable.throw(error);
             });
     }
 
-    private get_permission_store_list(emp_id: string) {
-        return this.http_service.request('/api/employee/permissionStores/' + emp_id, 'get', null)
+    private getPermissionStoreList(empId: string) {
+        return this.httpService.request('/api/employee/permissionStores/' + empId, 'get', null)
             .map((res) => {
                 return res;
             })
             .catch((error: any) => {
-                this.is_login_in = false;
+                this.isLogin = false;
                 return Observable.throw(error);
             });
     }

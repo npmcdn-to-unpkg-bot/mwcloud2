@@ -10,6 +10,7 @@ import { MwThemeSpinner } from '@mw/core/index';
 import { MwThemePreloader } from '@mw/core/index';
 import { MwImageLoaderService } from '@mw/core/index';
 import { ToasterService } from 'angular2-toaster/angular2-toaster';
+import { OrderStatus } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,
@@ -26,39 +27,39 @@ import { ToasterService } from 'angular2-toaster/angular2-toaster';
 export class LoginComponent {
     model = new AuthModel("", "", true);
     constructor(
-        public auth_service: AuthService,
+        public authService: AuthService,
         public router: Router,
-        private image_loader: MwImageLoaderService,
+        private imageLoader: MwImageLoaderService,
         private spinner: MwThemeSpinner,
-        private toaster_service: ToasterService
+        private toasterService: ToasterService
     ) {
         this.loadImages();
     }
 
     login() {
-        this.auth_service.login(this.model).subscribe(
+        this.authService.login(this.model).subscribe(
             (res) => {
-                if (this.auth_service.is_login_in) {
-                    this.get_permission(res);
+                if (this.authService.isLogin) {
+                    this.getPermission(res);
                 }
             },
-            (error) => {this.toaster_service.pop("error", "Title", error);}
+            (error) => {this.toasterService.pop("error", "Title", error);}
         );
     }
 
-    get_permission(emp_id: string) {
-        this.auth_service.get_permission(emp_id).subscribe(
+    getPermission(empId: string) {
+        this.authService.getPermission(empId).subscribe(
             (res) => {
-                if (this.auth_service.is_login_in) {
-                    this.router.navigate(['/dashboard/order-list/1']);
+                if (this.authService.isLogin) {
+                    this.router.navigate(['/dashboard/order-list/'+OrderStatus.UNPAID]);
                 }
             },
-            (error) => {this.toaster_service.pop("error", "Title", error);}
+            (error) => {this.toasterService.pop("error", "Title", error);}
         );
     }
 
     logout() {
-        this.auth_service.logout();
+        this.authService.logout();
     }
 
     public ngAfterViewInit(): void {
@@ -70,6 +71,6 @@ export class LoginComponent {
 
     private loadImages(): void {
         // register some loaders
-        MwThemePreloader.registerLoader(this.image_loader.load('assets/images/login.jpg'));
+        MwThemePreloader.registerLoader(this.imageLoader.load('assets/images/login.jpg'));
     }
 }

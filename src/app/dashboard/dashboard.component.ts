@@ -29,7 +29,7 @@ import { OrderStatus } from '@mw/core/index';
 export class DashboardComponent {
     private OrderStatusEnum = OrderStatus;
     constructor(
-        private image_loader: MwImageLoaderService,
+        private imageLoader: MwImageLoaderService,
         private spinner: MwThemeSpinner
     ) {
         //this.loadImages();
@@ -44,6 +44,6 @@ export class DashboardComponent {
 
     private loadImages(): void {
         // register some loaders
-        MwThemePreloader.registerLoader(this.image_loader.load('assets/images/login.jpg'));
+        MwThemePreloader.registerLoader(this.imageLoader.load('assets/images/login.jpg'));
     }
 }

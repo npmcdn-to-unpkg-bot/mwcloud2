@@ -11,7 +11,8 @@ const map: any = {
    '@angular2-material': 'vendor/@angular2-material',
    '@mw/core': 'core',
    'angular2-toaster': 'vendor/angular2-toaster',
-   'ng2-slim-loading-bar': 'vendor/ng2-slim-loading-bar'
+   'ng2-slim-loading-bar': 'vendor/ng2-slim-loading-bar',
+   'ng2-pagination': 'vendor/ng2-pagination/dist/ng2-pagination'
 };
 
 /** User packages configuration. */

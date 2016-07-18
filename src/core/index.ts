@@ -1,4 +1,5 @@
 //model
+export { BaseComponent, BasePageComponent } from './models/base.model';
 export { AuthModel } from './models/auth.model';
 export { MemberModel } from './models/member.model';
 export { OrderModel } from './models/order.model';
@@ -10,7 +11,7 @@ export { TextboxQuestion } from './models/question-textbox';
 export { HttpService } from './services/http.service';
 export { AuthGuard } from './services/auth.guard';
 export { AuthService } from './services/auth.service';
-export { CanDeactivateGuard } from './services/interfaces';
+//export { CanDeactivateGuard } from './services/interfaces';
 export { MwImageLoaderService } from './services/mw-image-loader.service';
 export { MwThemePreloader } from './services/mw-theme-preload.service';
 export { MwThemeSpinner } from './services/mw-theme-spinner.service';

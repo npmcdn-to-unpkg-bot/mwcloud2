@@ -1,6 +1,6 @@
-import { provideRouter, RouterConfig } from '@angular/router';
+import { provideRouter, RouterConfig, CanDeactivate } from '@angular/router';
+import { Observable }    from 'rxjs/Observable';
 
-import { CanDeactivateGuard } from '@mw/core/index';
 import { AuthGuard } from '@mw/core/index';
 import { AuthService } from '@mw/core/index';
 
@@ -11,6 +11,17 @@ import { OrderComponent } from '../order/order.component';
 import { OrderListComponent } from '../order-list/order-list.component';
 import { RegisterComponent } from '../register/register.component';
 import { IndexComponent } from '../index/index.component';
+
+
+export interface CanComponentDeactivate {
+ canDeactivate: () => boolean | Observable<boolean>;
+}
+
+export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
+  canDeactivate(component: CanComponentDeactivate): Observable<boolean> | boolean {
+    return component.canDeactivate ? component.canDeactivate() : true;
+  }
+}
 
 export const routes: RouterConfig = [
     { path: '', redirectTo: '/login', terminal: true },

@@ -1,6 +1,6 @@
 export class AuthModel {
     constructor(
-    	public user_name: string,
+    	public userName: string,
     	public password: string,
     	public remember: boolean
     ) {}

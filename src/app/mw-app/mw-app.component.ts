@@ -22,21 +22,28 @@ import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-
     ]
 })
 export class MwAppComponent {
+    toasterConfig: ToasterConfig =
+        new ToasterConfig({
+            showCloseButton: true,
+            tapToDismiss: false,
+            timeout: 3000
+        });
+
     constructor(
         private toasterService: ToasterService,
         private slimLoader: SlimLoadingBarService,
-        private _state: AppState,
-        private auth_service: AuthService,
+        private appState: AppState,
+        private authService: AuthService,
         private router: Router,
         private window: Window
     ) {
         //get employee info from localstorage
-        var emp_info_str = this.window.localStorage.getItem("emp_info");
-        if (emp_info_str && emp_info_str.length > 0) {
-            this.auth_service.is_login_in = true;
-            this.auth_service.emp_info = JSON.parse(emp_info_str);
+        var empInfoStr = this.window.localStorage.getItem("emp_info");
+        if (empInfoStr && empInfoStr.length > 0) {
+            this.authService.isLogin = true;
+            this.authService.empInfo = JSON.parse(empInfoStr);
         } else {
-            this.auth_service.is_login_in = false;
+            this.authService.isLogin = false;
         }
 
         //router events
@@ -53,19 +60,12 @@ export class MwAppComponent {
         });
 
         //alert event subscribe
-        this._state.subscribe('alert.warn', (message: string) => {
+        this.appState.subscribe('alert.warn', (message: string) => {
              this.toasterService.pop('success', 'success', message);
              this.toasterService.pop('warning', 'warning', message);
              this.toasterService.pop('info', 'info', message);
              this.toasterService.pop('error', 'error', message);
         });
     }
-
-    public toasterconfig: ToasterConfig =
-        new ToasterConfig({
-            showCloseButton: true,
-            tapToDismiss: false,
-            timeout: 3000
-        });
 
 }
