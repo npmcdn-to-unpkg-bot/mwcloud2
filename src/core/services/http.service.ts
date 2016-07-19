@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
-import { ToasterService } from 'angular2-toaster/angular2-toaster';
+//import { ToasterService } from 'angular2-toaster/angular2-toaster';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/throw';
@@ -16,7 +16,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class HttpService {
-    constructor(private http: Http, private toasterService: ToasterService) {
+    constructor(private http: Http) {
 
     }
 
@@ -31,19 +31,18 @@ export class HttpService {
         return this.http.request(url, options)
             .map(this.extractData)
             .catch((error: any) => {
-                let errorMessage = (error.message) ? error.message :
-                    error.status ? `${error.status} - ${error.statusText}` : 'Server error';
-                let errorCode = (error.code) ? error.code : error.status ? error.status : "500";
-                switch (errorCode) {
-                    case "120002":
-                        this.toasterService.pop('warning', 'Title', errorMessage);
-                        break;
-                    case "500":
-                    default:
-                        this.toasterService.pop('error', 'Title', errorMessage);
-                        break;
-                }
-                return Observable.throw(errorMessage);
+                //let errorMessage = (error.message) ? error.message : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
+                // let errorCode = (error.code) ? error.code : error.status ? error.status : "500";
+                // switch (errorCode) {
+                //     case "120002":
+                //         this.toasterService.pop('warning', 'Title', errorMessage);
+                //         break;
+                //     case "500":
+                //     default:
+                //         this.toasterService.pop('error', 'Title', errorMessage);
+                //         break;
+                // }
+                return Observable.throw(error);
             });
     }
 

@@ -9,8 +9,8 @@ import { AuthModel } from '@mw/core/index';
 import { MwThemeSpinner } from '@mw/core/index';
 import { MwThemePreloader } from '@mw/core/index';
 import { MwImageLoaderService } from '@mw/core/index';
-import { ToasterService } from 'angular2-toaster/angular2-toaster';
 import { OrderStatus } from '@mw/core/index';
+import { EventBus } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,
@@ -31,7 +31,7 @@ export class LoginComponent {
         public router: Router,
         private imageLoader: MwImageLoaderService,
         private spinner: MwThemeSpinner,
-        private toasterService: ToasterService
+        private eventBus: EventBus
     ) {
         this.loadImages();
     }
@@ -43,7 +43,7 @@ export class LoginComponent {
                     this.getPermission(res);
                 }
             },
-            (error) => {this.toasterService.pop("error", "Title", error);}
+            (error) => {this.eventBus.notifyDataChanged("alert.message", error);}
         );
     }
 
@@ -54,7 +54,7 @@ export class LoginComponent {
                     this.router.navigate(['/dashboard/order-list/'+OrderStatus.UNPAID]);
                 }
             },
-            (error) => {this.toasterService.pop("error", "Title", error);}
+            (error) => {this.eventBus.notifyDataChanged("alert.message", error);}
         );
     }
 

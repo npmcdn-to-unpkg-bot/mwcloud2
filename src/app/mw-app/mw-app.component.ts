@@ -60,12 +60,27 @@ export class MwAppComponent {
         });
 
         //alert event subscribe
-        this.eventBus.subscribe('alert.warn', (message: string) => {
-             this.toasterService.pop('success', 'success', message);
-             this.toasterService.pop('warning', 'warning', message);
-             this.toasterService.pop('info', 'info', message);
-             this.toasterService.pop('error', 'error', message);
+        // this.eventBus.subscribe('alert.warn', (message: string) => {
+        //      this.toasterService.pop('success', 'success', message);
+        //      this.toasterService.pop('warning', 'warning', message);
+        //      this.toasterService.pop('info', 'info', message);
+        //      this.toasterService.pop('error', 'error', message);
+        // });
+
+        this.eventBus.subscribe('alert.message', (message: any) => {
+            let toasterBody:string = "";
+            let messageType = typeof(message);
+            switch(messageType){
+                case "string":
+                    toasterBody = message;
+                    break;
+                case "object":
+                    toasterBody = message.message;
+                    break;
+            }
+            this.toasterService.pop('info', 'Title', toasterBody);
         });
+
     }
 
 }

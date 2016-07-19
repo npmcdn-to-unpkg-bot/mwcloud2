@@ -1,20 +1,23 @@
 import { BaseModel } from './base.model';
 import { MemberModel } from './member.model';
 import { OrderType,OrderSource,OrderStatus } from '../enums/order.enum';
+import { ItemBaseModel } from './item-base.model';
+import { ItemFactory } from './item.factory';
 
 export class OrderModel extends BaseModel {
-    order_no: string;
-    original_money:number;
-    receivable_money:number;
-    real_receivable_money:number;
+    orderNo: string;
+    originalMoney:number;
+    receivableMoney:number;
+    realReceivableMoney:number;
     repair:boolean;
     remark:string;
-    order_date:string;
-    pay_date: string;
+    orderDate:string;
+    payDate: string;
     source:OrderSource;
     status:OrderStatus;
-    order_type:OrderType;
+    orderType:OrderType;
     member: MemberModel;
+    itemList:ItemBaseModel[];
     // constructor(id: number, order_no: string, pay_date: string) {
     //     super(id);
     //     this.order_no = order_no;
@@ -41,31 +44,25 @@ export class OrderModel extends BaseModel {
     }
 
     static serializer(model:any):OrderModel{
-        if(!model){
-            return null;
+        let order : OrderModel = new OrderModel(model.id);
+        //order_model.id = model.id;
+        order.originalMoney = order.point2yuan(model.originalMoney);
+        order.receivableMoney = order.point2yuan(model.receivableMoney);
+        order.realReceivableMoney = order.point2yuan(model.realReceivableMoney);
+        order.orderNo = model.orderNo;
+        order.payDate = model.payDate;
+        order.orderDate = model.orderDate;
+        order.source = +model.source;
+        order.status = +model.status;
+        order.orderType = +model.orderKind;
+        order.member = MemberModel.serializer(model.simpleMemberVo,model.memberId);
+        if(model.orderItems && model.orderItems.length > 0){
+            order.itemList = [];
+            for(let i in model.orderItems){
+                order.itemList.push(ItemFactory.serializerItem(model.orderItems[i]));
+            }
         }
-        // let order_model = new OrderModel(
-        //     model.id,
-        //     model.orderNo,
-        //     model.payDate,
-        //     model.memberId,
-        //     model.memberNo,
-        //     model.memberName,
-        //     model.memberMobile
-        // );
-        let order_model : OrderModel = new OrderModel();
-        order_model.id = model.id;
-        order_model.original_money = order_model.point2yuan(model.originalMoney);
-        order_model.receivable_money = order_model.point2yuan(model.receivableMoney);
-        order_model.real_receivable_money = order_model.point2yuan(model.realReceivableMoney);
-        order_model.order_no = model.orderNo;
-        order_model.pay_date = model.payDate;
-        order_model.order_date = model.orderDate;
-        order_model.source = +model.source;
-        order_model.status = +model.status;
-        order_model.order_type = +model.orderKind;
-        order_model.member = MemberModel.serializer(model.simpleMemberVo,model.memberId);
-        return order_model;
+        return order;
     } 
 
 }

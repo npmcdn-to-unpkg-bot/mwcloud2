@@ -4,6 +4,7 @@ import { MdButton } from '@angular2-material/button';
 import { MD_CARD_DIRECTIVES } from '@angular2-material/card';
 import { ToasterService } from 'angular2-toaster/angular2-toaster';
 import { PaginationControlsCmp, PaginatePipe, PaginationService } from 'ng2-pagination';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 
 import { AuthService } from '@mw/core/index';
 import { OrderService } from '@mw/core/index';
@@ -24,13 +25,10 @@ import { EventBus } from '@mw/core/index';
     animations: [
         trigger('sideBarState', [
             state('collapse', style({
-                //display: 'none'
-                width:"0%",
-                maxWidth:"0%"
+                width:"0px"
             })),
             state('show', style({
-                //display: 'block'
-                width:'20%'
+                width:'210px'
             })),
             transition('collapse => show', animate('200ms')),
             transition('show => collapse', animate('200ms'))
@@ -47,7 +45,14 @@ export class OrderListComponent extends PageBaseComponent implements OnInit {
     private sideBarState: string = 'show';
     private orderList: OrderModel[] = [];
 
-    constructor(private orderService: OrderService, private authService: AuthService, private eventBus: EventBus, private route: ActivatedRoute, private toasterService: ToasterService) {
+    constructor(
+        private orderService: OrderService, 
+        private authService: AuthService, 
+        private eventBus: EventBus, 
+        private route: ActivatedRoute, 
+        private toasterService: ToasterService,
+        private slimLoader: SlimLoadingBarService
+    ) {
       super();
     }
 
@@ -59,17 +64,22 @@ export class OrderListComponent extends PageBaseComponent implements OnInit {
         this.eventBus.notifyDataChanged("menu.select", "order-list");
     }
     btnClick() {
-        this.eventBus.notifyDataChanged("alert.warn", "button clicked");
+        this.eventBus.notifyDataChanged("alert.message", "button clicked");
     }
 
     getPage(page: number) {
+        this.slimLoader.start();
         this.orderService.getOrderList(this.authService.empInfo.mchId,this.paginationConfig).subscribe(
             (res) => {
                 this.paginationConfig.currentPage = page;
                 this.paginationConfig.totalItems = res.totalItems;
                 this.orderList = res.rows;
+                this.slimLoader.complete();
             },
-            (error) => { this.toasterService.pop("error", "Title", error); }
+            (error) => { 
+                this.eventBus.notifyDataChanged("alert.message", error);
+                this.slimLoader.stop();
+            }
         );
     }
 
