@@ -9,15 +9,17 @@ export class ItemBaseModel extends BaseModel{
 		super(id);
 	}
 
-	static serializer(item:ItemBaseModel,model:any){
-		item.name = model.itemName;
-		item.price = model.sellingPrice;
+	serializer(model:any){
+		super.serializer(model.id);
+		this.name = model.itemName;
+		this.price = model.sellingPrice;
 		if(model.orderEmployees && model.orderEmployees.length > 0){
-			item.employeeList = [];
+			this.employeeList = [];
 			for(let i in model.orderEmployees){
-				item.employeeList.push(EmployeeModel.serializer(model.orderEmployees[i]));
+				let employee = new EmployeeModel();
+				employee.serializer(model.orderEmployees[i]);
+				this.employeeList.push(employee);
 			}
 		}
-		
 	}
 }

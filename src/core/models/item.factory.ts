@@ -7,11 +7,12 @@ export class ItemFactory{
 		let item : ItemBaseModel;
 		switch(model.itemType){
 			case "PRODUCT":
-				item = ProductModel.serializer(model);
+				item = new ProductModel();
+				item.serializer(model);
 				break;
 			default:
 			case "SERVICE_ITEM":
-				item = ServiceItemModel.serializer(model);
+				item = new ServiceItemModel().serializer(model);
 				break;
 		}
 		return item;

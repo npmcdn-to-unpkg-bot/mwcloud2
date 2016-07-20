@@ -69,7 +69,8 @@ export class OrderListComponent extends PageBaseComponent implements OnInit {
 
     getPage(page: number) {
         this.slimLoader.start();
-        this.orderService.getOrderList(this.authService.empInfo.mchId,this.paginationConfig).subscribe(
+        //this.slimLoader.progress = 30;
+        this.orderService.getOrderList(this.authService.empInfo.mchId,page,this.paginationConfig.itemsPerPage).subscribe(
             (res) => {
                 this.paginationConfig.currentPage = page;
                 this.paginationConfig.totalItems = res.totalItems;
@@ -78,7 +79,7 @@ export class OrderListComponent extends PageBaseComponent implements OnInit {
             },
             (error) => { 
                 this.eventBus.notifyDataChanged("alert.message", error);
-                this.slimLoader.stop();
+                this.slimLoader.complete();
             }
         );
     }

@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  cc:true
+  filePath:"http://newtest.mei1.com/api/file/",
+  localImagePath:"assets/images/"
 };

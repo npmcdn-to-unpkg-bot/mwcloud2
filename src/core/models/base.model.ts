@@ -5,6 +5,9 @@ export class BaseModel {
     constructor(id?:number) {
     	this.id = id;
     }
+    serializer(id:number){
+        this.id = id;
+    }
     public point2yuan(value:any){
     	return MoneyService.point2yuan(value);
     }

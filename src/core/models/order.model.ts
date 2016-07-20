@@ -43,26 +43,26 @@ export class OrderModel extends BaseModel {
         super(id);
     }
 
-    static serializer(model:any):OrderModel{
-        let order : OrderModel = new OrderModel(model.id);
-        //order_model.id = model.id;
-        order.originalMoney = order.point2yuan(model.originalMoney);
-        order.receivableMoney = order.point2yuan(model.receivableMoney);
-        order.realReceivableMoney = order.point2yuan(model.realReceivableMoney);
-        order.orderNo = model.orderNo;
-        order.payDate = model.payDate;
-        order.orderDate = model.orderDate;
-        order.source = +model.source;
-        order.status = +model.status;
-        order.orderType = +model.orderKind;
-        order.member = MemberModel.serializer(model.simpleMemberVo,model.memberId);
+    serializer(model:any){
+        super.serializer(model.id);
+        this.originalMoney = this.point2yuan(model.originalMoney);
+        this.receivableMoney = this.point2yuan(model.receivableMoney);
+        this.realReceivableMoney = this.point2yuan(model.realReceivableMoney);
+        this.orderNo = model.orderNo;
+        this.payDate = model.payDate;
+        this.orderDate = model.orderDate;
+        this.source = +model.source;
+        this.status = +model.status;
+        this.orderType = +model.orderKind;
+        model.simpleMemberVo.id = model.memberId;//???
+        this.member = new MemberModel().serializer(model.simpleMemberVo);
         if(model.orderItems && model.orderItems.length > 0){
-            order.itemList = [];
+            this.itemList = [];
             for(let i in model.orderItems){
-                order.itemList.push(ItemFactory.serializerItem(model.orderItems[i]));
+                this.itemList.push(ItemFactory.serializerItem(model.orderItems[i]));
             }
         }
-        return order;
+        return this;
     } 
 
 }

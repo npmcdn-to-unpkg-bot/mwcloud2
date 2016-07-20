@@ -5,10 +5,8 @@ export class ServiceItemModel extends ItemBaseModel{
 		super(id);
 	}
 
-	static serializer(model:any):ServiceItemModel{
-		let serviceItem:ServiceItemModel = new ServiceItemModel(model.id);
-		//serviceItem.name = model.itemName;
-		ItemBaseModel.serializer(serviceItem,model);
-		return serviceItem;
+	serializer(model:any){
+		super.serializer(model);
+		return this;
 	}
 }

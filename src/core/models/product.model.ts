@@ -5,9 +5,8 @@ export class ProductModel extends ItemBaseModel{
 		super(id);
 	}
 
-	static serializer(model:any):ProductModel{
-		let product:ProductModel = new ProductModel(model.id);
-		ItemBaseModel.serializer(product,model);
-		return product;
+	serializer(model:any){
+		super.serializer(model);
+		return this;
 	}
 }

@@ -120,7 +120,7 @@ function _buildAppTree(defaults) {
       'material-design-icons-iconfont/dist/**/*',
       'font-awesome/**/*',
       'angular2-toaster/**/*',
-      'ng2-slim-loading-bar/**/*.+(ts|js|js.map)',
+      'ng2-slim-loading-bar/**/*.+(ts|css|js|js.map)',
       'intl/dist/*.min.+(js|js.map)',
       'ng2-pagination/dist/*.+(js|js.map)'
     ]

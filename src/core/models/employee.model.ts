@@ -6,9 +6,9 @@ export class EmployeeModel extends BaseModel{
 		super(id);
 	}
 
-	static serializer(model:any):EmployeeModel{
-		let employee:EmployeeModel = new EmployeeModel(model.id);
-		employee.name = model.employeeName;
-		return employee;
+	serializer(model:any){
+		super.serializer(model);
+		this.name = model.employeeName;
+		return this;
 	}
 }

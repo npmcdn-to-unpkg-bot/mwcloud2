@@ -68,6 +68,7 @@ export class MwAppComponent {
         // });
 
         this.eventBus.subscribe('alert.message', (message: any) => {
+            console.log(message.toString());
             let toasterBody:string = "";
             let messageType = typeof(message);
             switch(messageType){
@@ -76,8 +77,12 @@ export class MwAppComponent {
                     break;
                 case "object":
                     toasterBody = message.message;
+                    if(message.stack){
+                        console.log(message.stack);
+                    }
                     break;
             }
+
             this.toasterService.pop('info', 'Title', toasterBody);
         });
 

@@ -12,8 +12,8 @@ import { OrderModel } from '../models/order.model';
 export class OrderService {
     constructor(private httpService: HttpService) {}
 
-    getOrderList(mchId:string,paginationConfig:IPaginationInstance) {
-        let data = {page:paginationConfig.currentPage,size:paginationConfig.itemsPerPage};
+    getOrderList(mchId:string,page:number,size:number) {
+        let data = {page:page,size:size};
         return this.httpService.request('/api/order/getList', 'post', data)
             .map((res)=>{
                 let result:any = {};
@@ -23,7 +23,7 @@ export class OrderService {
                     if(res.rows && res.rows.length > 0){
                         for(let i in res.rows){
                             if(res.rows[i]){
-                                result.rows.push(OrderModel.serializer(res.rows[i]));
+                                result.rows.push(new OrderModel().serializer(res.rows[i]));
                             }
                         }
                     }
