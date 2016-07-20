@@ -55,6 +55,9 @@ export class OrderModel extends BaseModel {
         this.status = +model.status;
         this.orderType = +model.orderKind;
         model.simpleMemberVo.id = model.memberId;//???
+        model.simpleMemberVo.name = model.memberName;
+        model.simpleMemberVo.mobile = model.memberMobile;
+        model.simpleMemberVo.memberNo = model.memberNo;
         this.member = new MemberModel().serializer(model.simpleMemberVo);
         if(model.orderItems && model.orderItems.length > 0){
             this.itemList = [];

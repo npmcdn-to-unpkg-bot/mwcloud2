@@ -31,7 +31,7 @@
                     <span flex="10">应收金额</span>
                     <span flex="20">操作</span>
                 </div>
-                <md-list-item *ngFor="let order of orderList | paginate: paginationConfig">
+                <md-list-item *ngFor="let order of orderList | paginate: paginationConfig;let idx=index;">
                     <div layout="row">
                         <div flex="20" layout="row">
                             <div class="avatar-circle" flex-offset="5">
@@ -54,19 +54,20 @@
                         </div>
                         <div flex="20">{{order.orderDate}}</div>
                         <div flex="20" layout="column">
-                            <span *ngFor="let item of order.itemList">
-                                {{item.name}}
+                            <span *ngFor="let item of order.itemList;let itemIndex=index;">
+                                <span *ngIf="itemIndex<2">{{item.name}}</span>
                             </span>
+                            <span *ngIf="order?.itemList?.length>2">...</span>
                         </div>
-                        <div flex="10">
+                        <div flex="10" layout="row" layout-wrap class="text-overflow">
                             <span *ngFor="let item of order.itemList">
                                 <span *ngFor="let emp of item.employeeList">
-                                    {{emp.name}}
+                                    <span>{{emp.name}}</span>
                                 </span>
                             </span>
                         </div>
                         <div flex="10">{{order.receivableMoney | currency:'CNY':true:'1.2-2'}}</div>
-                        <div flex="20"></div>
+                        <div flex="20">{{idx}}</div>
                     </div>
                 </md-list-item>
             </md-list>

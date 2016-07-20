@@ -35,7 +35,7 @@ import { EventBus } from '@mw/core/index';
         ])
     ]
 })
-export class OrderListComponent extends PageBaseComponent implements OnInit {
+export class OrderListComponent extends PageBaseComponent implements OnInit,OnDestroy {
     private sub: any;
     private GenderTypeEnum = GenderType;
     private OrderTypeEnum = OrderType;
@@ -59,8 +59,8 @@ export class OrderListComponent extends PageBaseComponent implements OnInit {
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
             this.orderType = +params['type']; // (+) converts string 'id' to a number
+            this.getPage(this.paginationConfig.currentPage);
         });
-        this.getPage(this.paginationConfig.currentPage);
         this.eventBus.notifyDataChanged("menu.select", "order-list");
     }
     btnClick() {
@@ -70,17 +70,18 @@ export class OrderListComponent extends PageBaseComponent implements OnInit {
     getPage(page: number) {
         this.slimLoader.start();
         //this.slimLoader.progress = 30;
-        this.orderService.getOrderList(this.authService.empInfo.mchId,page,this.paginationConfig.itemsPerPage).subscribe(
-            (res) => {
-                this.paginationConfig.currentPage = page;
-                this.paginationConfig.totalItems = res.totalItems;
-                this.orderList = res.rows;
-                this.slimLoader.complete();
-            },
-            (error) => { 
-                this.eventBus.notifyDataChanged("alert.message", error);
-                this.slimLoader.complete();
-            }
+        this.orderService.getOrderList(this.authService.empInfo.mchId,this.authService.empInfo.storeId,this.orderType,page,this.paginationConfig.itemsPerPage)
+            .subscribe(
+                (res) => {
+                    this.paginationConfig.currentPage = page;
+                    this.paginationConfig.totalItems = res.totalItems;
+                    this.orderList = res.rows;
+                    this.slimLoader.complete();
+                },
+                (error) => { 
+                    this.eventBus.notifyDataChanged("alert.message", error);
+                    this.slimLoader.complete();
+                }
         );
     }
 

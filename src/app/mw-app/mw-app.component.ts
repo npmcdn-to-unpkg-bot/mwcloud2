@@ -24,8 +24,8 @@ import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-
 export class MwAppComponent {
     toasterConfig: ToasterConfig =
         new ToasterConfig({
-            showCloseButton: true,
-            tapToDismiss: false,
+            showCloseButton: false,
+            tapToDismiss: true,
             timeout: 3000
         });
 
@@ -37,6 +37,12 @@ export class MwAppComponent {
         private router: Router,
         private window: Window
     ) {
+        this.getEmployeeInfo();
+        this.handleRouteChanged();
+        this.handleAlertMessage();
+    }
+
+    private getEmployeeInfo() {
         //get employee info from localstorage
         var empInfoStr = this.window.localStorage.getItem("emp_info");
         if (empInfoStr && empInfoStr.length > 0) {
@@ -45,7 +51,9 @@ export class MwAppComponent {
         } else {
             this.authService.isLogin = false;
         }
+    }
 
+    private handleRouteChanged() {
         //router events
         this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationStart) {
@@ -58,7 +66,39 @@ export class MwAppComponent {
                 this.slimLoader.complete();
             }
         });
+    }
 
+    private handleAlertMessage() {
+        this.eventBus.subscribe('alert.message', (message: any) => {
+            console.log(message.toString());
+            let toasterBody: string = "";
+            let messageType = typeof(message);
+            let toasterType = "info";
+            switch (messageType) {
+                case "string":
+                    toasterBody = message;
+                    break;
+                case "object":
+                    if (message.message) {
+                        //message.code
+                        toasterType = "warning";
+                        toasterBody = message.message;
+                    } else if (message.statusText) {
+                        //message.status
+                        toasterType = "error";
+                        toasterBody = message.statusText;
+                    }else{
+                        toasterType = "error";
+                        toasterBody = "未知错误";
+                    }
+                    if (message.stack) {
+                        console.log(message.stack);
+                    }
+                    break;
+            }
+
+            this.toasterService.pop(toasterType, 'Title', toasterBody);
+        });
         //alert event subscribe
         // this.eventBus.subscribe('alert.warn', (message: string) => {
         //      this.toasterService.pop('success', 'success', message);
@@ -66,26 +106,6 @@ export class MwAppComponent {
         //      this.toasterService.pop('info', 'info', message);
         //      this.toasterService.pop('error', 'error', message);
         // });
-
-        this.eventBus.subscribe('alert.message', (message: any) => {
-            console.log(message.toString());
-            let toasterBody:string = "";
-            let messageType = typeof(message);
-            switch(messageType){
-                case "string":
-                    toasterBody = message;
-                    break;
-                case "object":
-                    toasterBody = message.message;
-                    if(message.stack){
-                        console.log(message.stack);
-                    }
-                    break;
-            }
-
-            this.toasterService.pop('info', 'Title', toasterBody);
-        });
-
     }
 
 }
