@@ -122,7 +122,8 @@ function _buildAppTree(defaults) {
       'angular2-toaster/**/*',
       'ng2-slim-loading-bar/**/*.+(ts|css|js|js.map)',
       'intl/dist/*.min.+(js|js.map)',
-      'ng2-pagination/dist/*.+(js|js.map)'
+      'ng2-pagination/dist/*.+(js|js.map)',
+      'h5webstorage/*.+(js|js.map)'
     ]
   });
 }

@@ -5,6 +5,7 @@ import { ToasterContainerComponent, ToasterService, ToasterConfig } from 'angula
 import { EventBus } from '@mw/core/index';
 import { AuthService } from '@mw/core/index';
 import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+import {LocalStorage} from "h5webstorage";
 
 @Component({
     moduleId: module.id,
@@ -35,7 +36,8 @@ export class MwAppComponent {
         private eventBus: EventBus,
         private authService: AuthService,
         private router: Router,
-        private window: Window
+        private localStorage: LocalStorage
+        //private window: Window
     ) {
         this.getEmployeeInfo();
         this.handleRouteChanged();
@@ -44,7 +46,14 @@ export class MwAppComponent {
 
     private getEmployeeInfo() {
         //get employee info from localstorage
-        var empInfoStr = this.window.localStorage.getItem("emp_info");
+        // var empInfoStr = this.window.localStorage.getItem("emp_info");
+        // if (empInfoStr && empInfoStr.length > 0) {
+        //     this.authService.isLogin = true;
+        //     this.authService.empInfo = JSON.parse(empInfoStr);
+        // } else {
+        //     this.authService.isLogin = false;
+        // }
+        var empInfoStr = this.localStorage.getItem("emp_info");
         if (empInfoStr && empInfoStr.length > 0) {
             this.authService.isLogin = true;
             this.authService.empInfo = JSON.parse(empInfoStr);

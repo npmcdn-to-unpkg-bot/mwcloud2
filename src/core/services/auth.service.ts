@@ -11,6 +11,7 @@ import 'rxjs/add/operator/reduce';
 import 'rxjs/add/operator/switchMap';
 import { AuthModel } from '../models/auth.model';
 import { HttpService } from './http.service';
+import { LocalStorage,WEB_STORAGE_PROVIDERS } from "h5webstorage";
 
 
 @Injectable()
@@ -19,8 +20,8 @@ export class AuthService {
     empInfo: any;
     permissionCodeList: any[] = [];
     permissionStoreList: any[] = [];
-    constructor(private httpService: HttpService, private window: Window) {}
-    //constructor(private httpService: HttpService) {}
+    //constructor(private httpService: HttpService, private window: Window) {}
+    constructor(private httpService: HttpService,private localStorage:LocalStorage) {}
 
     public login(model: AuthModel) {
         let data = {
@@ -102,7 +103,7 @@ export class AuthService {
                 this.empInfo.storeId = empList[0].store.id;
                 this.empInfo.storeName = empList[0].store.name;
             }
-            this.window.localStorage.setItem('emp_info', JSON.stringify(this.empInfo));
+            this.localStorage.setItem('emp_info', JSON.stringify(this.empInfo));
         } else {
             return Observable.throw("获取员工身份失败");
         }

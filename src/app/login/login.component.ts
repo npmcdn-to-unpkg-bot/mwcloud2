@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MdCheckbox } from '@angular2-material/checkbox';
 import { MdButton } from '@angular2-material/button';
 import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 
 import { AuthService } from '@mw/core/index';
 import { AuthModel } from '@mw/core/index';
@@ -31,30 +32,41 @@ export class LoginComponent {
         public router: Router,
         private imageLoader: MwImageLoaderService,
         private spinner: MwThemeSpinner,
-        private eventBus: EventBus
+        private eventBus: EventBus,
+        private slimLoader: SlimLoadingBarService
     ) {
         this.loadImages();
     }
 
     login() {
+        this.slimLoader.start();
         this.authService.login(this.model).subscribe(
             (res) => {
                 if (this.authService.isLogin) {
                     this.getPermission(res);
+                }else{
+                    this.slimLoader.complete();
                 }
             },
-            (error) => {this.eventBus.notifyDataChanged("alert.message", error);}
+            (error) => {
+                this.slimLoader.complete();
+                this.eventBus.notifyDataChanged("alert.message", error);
+            }
         );
     }
 
     getPermission(empId: string) {
         this.authService.getPermission(empId).subscribe(
             (res) => {
+                this.slimLoader.complete();
                 if (this.authService.isLogin) {
                     this.router.navigate(['/dashboard/order-list/'+OrderStatus.UNPAID]);
                 }
             },
-            (error) => {this.eventBus.notifyDataChanged("alert.message", error);}
+            (error) => {
+                this.slimLoader.complete();
+                this.eventBus.notifyDataChanged("alert.message", error);
+            }
         );
     }
 
