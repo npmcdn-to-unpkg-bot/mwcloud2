@@ -1,21 +1,23 @@
-<div class="day-view">
-      <div class="hour-rows">
+<div class="employee-view">
+    <div class="hour-rows" layout="row">
         <div class="hour-col-time">
-          <div class="hour" *ngFor="let hour of hours; trackBy:trackByItem">
-            <div
-              class="hour-segment"
-              *ngFor="let segment of hour.segments; trackBy:trackByItem"
-              (click)="hourSegmentClicked.emit({date: segment.date.toDate()})">
-              <div *ngIf="segment.isStart" class="time">
-                {{ segment.date | calendarDate:'day':'hour' }}
-              </div>
-              &nbsp;
+            <div class="hour" *ngFor="let hour of hours; trackBy:trackByItem">
+                <div class="hour-segment" *ngFor="let segment of hour.segments; trackBy:trackByItem" (click)="hourSegmentClicked.emit({date: segment.date.toDate()})">
+                    <div *ngIf="segment.isStart" class="time">
+                        {{ segment.date | calendarDate:'day':'hour' }}
+                    </div>
+                    &nbsp;
+                </div>
             </div>
-          </div>
         </div>
-        <div class="hour-col-events">
-          <div class="hour-row-header"></div>
-          <div
+        <div class="hour-col-events" layout="row" flex>
+            <div *ngFor="let header of headers" flex="1" layout="column" class="col-wrap">
+                <div class="col-header">
+                    <span>{{header.name}}</span>
+                </div>
+                <div flex class="col-body"></div>
+            </div>
+            <!-- <div
             class="event"
             *ngFor="let dayEvent of view?.events; trackBy:trackByItem"
             [style.marginTop.px]="dayEvent.top"
@@ -43,14 +45,15 @@
                 [innerHtml]="action.label">
               </a>
             </span>
-          </div>
-          <div class="hour-event">
-            <div class="hour" *ngFor="let hour of hours; trackBy:trackByItem" [style.minWidth.px]="view?.width">
-              <div class="hour-segment" *ngFor="let segment of hour.segments; trackBy:trackByItem">
-                &nbsp;
-              </div>
-            </div>
-          </div>
+          </div> -->
+            <!-- <div class="hour-event">
+                <div class="hour" *ngFor="let hour of hours; trackBy:trackByItem" [style.minWidth.px]="view?.width">
+                    <div class="hour-segment" *ngFor="let segment of hour.segments; trackBy:trackByItem">
+                        &nbsp;
+                    </div>
+                </div>
+            </div> -->
         </div>
-      </div>
     </div>
+    <div class="view-foot"></div>
+</div>

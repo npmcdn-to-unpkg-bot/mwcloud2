@@ -13,6 +13,7 @@ import {Subject} from 'rxjs/Subject';
 import {Subscription} from 'rxjs/Subscription';
 import {CalendarDate} from './calendarDate.pipe';
 import {CalendarEventTitle} from './calendarEventTitle.pipe';
+import { EmployeeModel } from '@mw/core/index';
 
 const SEGMENT_HEIGHT: number = 30;
 
@@ -30,6 +31,7 @@ export class MwEmployeeTableView implements OnChanges {
 
   @Input() date: Date;
   @Input() events: CalendarEvent[] = [];
+  @Input() headers: EmployeeModel[] = [];
   @Input() hourSegments: number = 2;
   @Input() dayStartHour: number = 0;
   @Input() dayStartMinute: number = 0;

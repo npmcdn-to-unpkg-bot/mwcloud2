@@ -1,6 +1,6 @@
-<div class="booking-table-component" layout="column">
+<div class="booking-table-component">
     <div layout="row" flex="100">
-        <div flex class="booking-table-content" layout="column" flex="100">
+        <div flex class="booking-table-content" flex="100">
             <header class="c-header" layout="row" layout-align="space-between center">
                 <span class="mw-fs-24">预约中心</span>
                 <div class="btn-group">
@@ -19,7 +19,7 @@
                 </div> -->
                 <button md-raised-button color="primary" (click)="btnClick()">primary</button>
             </header>
-            <div class="booking-table" flex>
+            <div class="booking-table">
                 <!-- <div class="booking-table-body" flex>
                     <div class="booking-bar booking-left-bar"></div>
                     <div class="booking-bar booking-top-bar"></div>
@@ -31,8 +31,9 @@
                 </div>
                 <div class="booking-bottom-foot" style="height:50px;">
                 </div> -->
-                <mw-employee-table-view [date]="date" [events]="events">
+                <mw-employee-table-view [date]="date" [events]="events" [headers]="empList">
                 </mw-employee-table-view>
+                
             </div>
         </div>
         <!--<md-card class="side-bar no-padding" [mwCollapse]="sideBarCollapse" flex="20">

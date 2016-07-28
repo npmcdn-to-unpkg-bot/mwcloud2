@@ -193,18 +193,18 @@ export class BookingTableComponent implements OnInit {
             this.empList.push(new EmployeeModel(i + 1, "技师" + (i + 1) + "号"));
         }
 
-        for (let i: number = 0; i < 7; i++) {
-            for (let j: number = 0; j < 5; j++) {
-                this.events.push({
-                    start: moment().startOf('week').add(j, 'minutes').add(i, 'days').toDate(),
-                    title: `Event column ${i} count ${j}`,
-                    color: {
-                        primary: '#1e90ff',
-                        secondary: '#D1E8FF'
-                    }
-                });
-            }
-        }
+        // for (let i: number = 0; i < 7; i++) {
+        //     for (let j: number = 0; j < 5; j++) {
+        //         this.events.push({
+        //             start: moment().startOf('week').add(j, 'minutes').add(i, 'days').toDate(),
+        //             title: `Event column ${i} count ${j}`,
+        //             color: {
+        //                 primary: '#1e90ff',
+        //                 secondary: '#D1E8FF'
+        //             }
+        //         });
+        //     }
+        // }
     }
 
     ngOnInit() {

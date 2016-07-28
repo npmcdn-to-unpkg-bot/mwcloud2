@@ -1,34 +1,37 @@
 @import 'variables';
 @import '../../../style/color-const';
 
-.day-view {
-
-  // .hour:nth-child(odd) {
-  //   background-color: #fafafa;
-  // }
-
+.employee-view {
+  height:100%;
+  //overflow-y:auto;
+  .hour-rows{
+    height:calc(100% - 30px);
+    overflow-y:auto;
+  }
   .hour-segment {
     height: 30px;
   }
-  .hour-row-header{
+  .col-header{
     height:30px;
+    line-height:30px;
+    text-align:center;
     color:#fff;
     background-color:$mw-primary;
   }
 
+  .col-wrap{
+    border-left:thin solid #e1e1e1;
+    min-width: 80px;
+  }
   .hour-event .hour:not(:last-child) .hour-segment,
   .hour-event .hour:last-child .hour-segment:not(:last-child) {
-    border-bottom: thin dashed #e1e1e1;
+    border-bottom: 1px dashed #e1e1e1;
   }
 
   .time {
     font-weight: bold;
     padding-top: 5px;
   }
-
-  // .hour-segment:hover {
-  //   background-color: #ededed;
-  // }
 
   .event {
     position: absolute;
@@ -50,33 +53,35 @@
     border-bottom-right-radius: 5px;
   }
 
-  .hour-col-time,
-  .hour-col-events {
-    float: left;
-    background-color:#fff;
-  }
-  .col-header{
-    height:50px;
-    width:100%;
-  }
-
   .hour-col-time {
+    //margin-top:15px;
     padding-top:15px;
+    padding-bottom:15px;
     width: 70px;
-    //border-left: solid 1px #e1e1e1;
-    //border-top: solid 1px #e1e1e1;
-    //border-bottom: solid 1px #e1e1e1;
-    border: solid 1px #e1e1e1;
+    border-top: solid 1px #e1e1e1;
+    border-left: solid 1px #e1e1e1;
+    border-bottom: solid 1px #e1e1e1;
     text-align: center;
+    background-color:#fff;
+    height:1472px;
   }
 
   .hour-col-events {
     position: relative;
-    overflow-x: scroll;
-    width: calc(100% - 70px);
+    overflow-x: auto;
+    //width: calc(100% - 70px);
     border-right: solid 1px #e1e1e1;
     border-top: solid 1px #e1e1e1;
     border-bottom: solid 1px #e1e1e1;
+    background: linear-gradient(to bottom, #fff 30px, #fafafa 30px) 0 0/auto 60px;
+    height:1472px;
   }
-
+  .view-foot {
+      background-color: #fff;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 30px;
+      border: solid 1px #e1e1e1;
+  }
 }
