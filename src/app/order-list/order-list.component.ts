@@ -13,6 +13,7 @@ import { GenderType } from '@mw/core/index';
 import { OrderType, OrderSource, OrderStatus } from '@mw/core/index';
 import { PageBaseComponent } from '@mw/core/index';
 import { EventBus } from '@mw/core/index';
+import { MwCollapseDirective } from '@mw/core/index'; 
 
 @Component({
     moduleId: module.id,
@@ -20,7 +21,7 @@ import { EventBus } from '@mw/core/index';
     templateUrl: 'order-list.component.html',
     styleUrls: ['order-list.component.css'],
     providers: [OrderService, PaginationService],
-    directives: [ROUTER_DIRECTIVES, MdButton, MD_CARD_DIRECTIVES, PaginationControlsCmp],
+    directives: [ROUTER_DIRECTIVES, MdButton, MD_CARD_DIRECTIVES, PaginationControlsCmp,MwCollapseDirective],
     pipes: [PaginatePipe],
     animations: [
         trigger('sideBarState', [

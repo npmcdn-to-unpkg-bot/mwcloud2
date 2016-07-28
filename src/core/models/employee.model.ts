@@ -2,8 +2,9 @@ import { BaseModel } from './base.model';
 
 export class EmployeeModel extends BaseModel{
 	name:string;
-	constructor(id?:number){
+	constructor(id?:number,name?:string){
 		super(id);
+		this.name = name;
 	}
 
 	serializer(model:any){

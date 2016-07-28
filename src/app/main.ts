@@ -8,7 +8,7 @@ import { WEB_STORAGE_PROVIDERS} from "h5webstorage";
 
 import { environment } from './environment';
 import { MwAppComponent } from './mw-app/mw-app.component';
-import { MW_APP_ROUTER_PROVIDERS } from './mw-app/mw.app.routes';
+import { MW_APP_ROUTER_PROVIDERS } from './app.routes';
 import { HttpService } from '@mw/core/index';
 
 if (environment.production) {

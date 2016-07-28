@@ -53,10 +53,9 @@ export class MwAppComponent {
         // } else {
         //     this.authService.isLogin = false;
         // }
-        var empInfoStr = this.localStorage.getItem("emp_info");
-        if (empInfoStr && empInfoStr.length > 0) {
+        this.authService.empInfo = this.localStorage.getItem("emp_info");
+        if (this.authService.empInfo) {
             this.authService.isLogin = true;
-            this.authService.empInfo = JSON.parse(empInfoStr);
         } else {
             this.authService.isLogin = false;
         }
@@ -79,7 +78,7 @@ export class MwAppComponent {
 
     private handleAlertMessage() {
         this.eventBus.subscribe('alert.message', (message: any) => {
-            console.log(message.toString());
+            console.log(JSON.stringify(message));
             let toasterBody: string = "";
             let messageType = typeof(message);
             let toasterType = "info";

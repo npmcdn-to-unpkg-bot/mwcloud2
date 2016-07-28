@@ -16,7 +16,7 @@ import { LocalStorage,WEB_STORAGE_PROVIDERS } from "h5webstorage";
 
 @Injectable()
 export class AuthService {
-    isLogin: boolean = false;
+    isLogin: boolean = true;
     empInfo: any;
     permissionCodeList: any[] = [];
     permissionStoreList: any[] = [];

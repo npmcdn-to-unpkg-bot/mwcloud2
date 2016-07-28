@@ -1,0 +1,55 @@
+@import '../core/style/color-const';
+.booking-table-component {
+    //height: 100vh;
+    //width: 100%;
+    md-card {
+        margin-bottom: 10px;
+    }
+    padding: 10px 0;
+    .booking-table-content {
+        padding: 0 20px;
+        .booking-table {
+            //overflow: auto;
+            //height:600px;
+            // .booking-table-body {
+            //     position: relative;
+            //     overflow: auto;
+            //     background: linear-gradient(to bottom, #fafafa 49px, #EEE 24px) 0 0/auto 100px;
+            //     .booking-bar {
+            //         left: 0;
+            //         top: 0;
+            //     }
+            //     .booking-left-bar {
+            //     	position: absolute;
+            //     	bottom:0;
+            //         width: 50px;
+            //         height: 100%;
+            //         background-color: #C586D4;
+            //     }
+            //     .booking-top-bar {
+            //     	position: absolute;
+            //     	right:0;
+            //         height: 50px;
+            //         width: 100%;
+            //         background-color: $mw-primary;
+            //     }
+            //     .booking-top-item {
+            //         height: 50px;
+            //         line-height: 50px;
+            //         text-align: center;
+            //         width: 100px;
+            //         color:#fff;
+            //     }
+            //     .booking-grid{
+            //     	position:absolute;
+            //     }
+            // }
+            .booking-table-foot {
+                background-color: #fff;
+            }
+        }
+        .side-bar-button {
+            margin-right: 20px;
+        }
+    }
+}

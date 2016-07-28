@@ -55,7 +55,7 @@ $side-menu-width-small: 60px;
         width: $side-menu-width-small;
     }
     .mw-body {
-        min-height: 100vh;
+        //min-height: 100vh;
         width: 100%;
         .mw-toolbar {
             z-index: 1;
@@ -72,6 +72,8 @@ $side-menu-width-small: 60px;
         .mw-toolbar.small {
             left: $side-menu-width-small;
         }
-        .mw-content {}
+        .mw-content {
+            min-height: calc(100vh - 50px);
+        }
     }
 }

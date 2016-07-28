@@ -10,6 +10,10 @@
                 <nobr><i class="fa fa-user"></i>
                 <span *ngIf="sideMenuState=='large'">Login</span></nobr>
             </a>
+            <a [routerLink]="['/dashboard/booking-table']" class="menu-item" [class.selected]="selectedMenu=='booking-table'">
+                 <nobr><i class="fa fa-user"></i>
+                <span *ngIf="sideMenuState=='large'">Booking Table</span></nobr>
+            </a>
             <a [routerLink]="['/dashboard/order']" class="menu-item" [class.selected]="selectedMenu=='order'">
                  <nobr><i class="fa fa-user"></i>
                 <span *ngIf="sideMenuState=='large'">Order</span></nobr>
@@ -24,7 +28,7 @@
     <div class="mw-body">
         <md-toolbar class="mw-toolbar" [class.small]="sideMenuState=='small'">
         </md-toolbar>
-        <div class="mw-content">
+        <div class="mw-content" layout="column">
             <router-outlet></router-outlet>
         </div>
     </div>

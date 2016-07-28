@@ -10,11 +10,11 @@ import {
   async, inject
 } from '@angular/core/testing';
 
-import { RegisterComponent } from './register.component';
+import { BookingTableComponent } from './booking-table.component';
 
-describe('Component: Register', () => {
+describe('Component: BookingTable', () => {
   it('should create an instance', () => {
-    //let component = new RegisterComponent();
+    //let component = new BookingTableComponent();
     //expect(component).toBeTruthy();
   });
 });

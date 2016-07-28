@@ -102,7 +102,8 @@ function _buildAppTree(defaults) {
     tsCompiler: {},
     sassCompiler: {
       includePaths: [
-        'src/core/style'
+        'src/core/style',
+        'src/core/component'
       ]
     },
     vendorNpmFiles: [
@@ -121,9 +122,12 @@ function _buildAppTree(defaults) {
       'font-awesome/**/*',
       'angular2-toaster/**/*',
       'ng2-slim-loading-bar/**/*.+(ts|css|js|js.map)',
+      'ng2-dnd/bundles/**/*.+(ts|js|js.map)',
       'intl/dist/*.min.+(js|js.map)',
       'ng2-pagination/dist/*.+(js|js.map)',
-      'h5webstorage/*.+(js|js.map)'
+      'h5webstorage/*.+(js|js.map)',
+      'moment/moment.js',
+      'calendar-utils/dist/src/*.+(ts|js|js.map)',
     ]
   });
 }

@@ -1,0 +1,48 @@
+<div class="booking-table-component" layout="column">
+    <div layout="row" flex="100">
+        <div flex class="booking-table-content" layout="column" flex="100">
+            <header class="c-header" layout="row" layout-align="space-between center">
+                <span class="mw-fs-24">预约中心</span>
+                <div class="btn-group">
+                    <div class="btn btn-primary" (click)="decrement()">
+                        Previous
+                    </div>
+                    <div class="btn btn-default" (click)="today()">
+                        Today
+                    </div>
+                    <div class="btn btn-primary" (click)="increment()">
+                        Next
+                    </div>
+                </div>
+                <!-- <div>
+                    <h3>{{ date | calendarTitle:view }}</h3>
+                </div> -->
+                <button md-raised-button color="primary" (click)="btnClick()">primary</button>
+            </header>
+            <div class="booking-table" flex>
+                <!-- <div class="booking-table-body" flex>
+                    <div class="booking-bar booking-left-bar"></div>
+                    <div class="booking-bar booking-top-bar"></div>
+                    <div layout="row" class="booking-bar booking-grid" style="margin-left:50px;">
+                        <div *ngFor="let item of empList" class="booking-top-item">
+                            <span>{{item.name}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="booking-bottom-foot" style="height:50px;">
+                </div> -->
+                <mw-employee-table-view [date]="date" [events]="events">
+                </mw-employee-table-view>
+            </div>
+        </div>
+        <!--<md-card class="side-bar no-padding" [mwCollapse]="sideBarCollapse" flex="20">
+            <div class="mw-header">$ 当前营业收入</div>
+        </md-card> -->
+    </div>
+</div>
+<!--     <div>
+        <mw-timer-picker [options]="myDatePickerOptions1" (dateChanged)="onDateChanged1($event)" [selDate]="selectedDate1">
+        </mw-timer-picker>
+        <mw-timer-picker [options]="myDatePickerOptions2" (dateChanged)="onDateChanged2($event)" [selDate]="selectedDate2">
+        </mw-timer-picker>
+    </div> -->

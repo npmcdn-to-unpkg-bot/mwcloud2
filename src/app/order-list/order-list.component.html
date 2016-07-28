@@ -76,7 +76,10 @@
             </div>
         </md-card>
     </div>
-    <md-card class="side-bar no-padding" @sideBarState="sideBarState">
+    <!-- <md-card class="side-bar no-padding" @sideBarState="sideBarState">
+        <div class="mw-header">$ 当前营业收入</div>
+    </md-card> -->
+    <md-card class="side-bar no-padding" [mwCollapse]="sideBarState=='collapse'">
         <div class="mw-header">$ 当前营业收入</div>
     </md-card>
 </div>

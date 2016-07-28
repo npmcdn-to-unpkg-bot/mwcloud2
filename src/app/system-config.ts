@@ -12,8 +12,11 @@ const map: any = {
    '@mw/core': 'core',
    'angular2-toaster': 'vendor/angular2-toaster',
    'ng2-slim-loading-bar': 'vendor/ng2-slim-loading-bar',
+   'ng2-dnd': 'vendor/ng2-dnd/bundles',
    'ng2-pagination': 'vendor/ng2-pagination/dist/ng2-pagination',
-   'h5webstorage':'vendor/h5webstorage/index'
+   'h5webstorage':'vendor/h5webstorage/index',
+   'moment':'vendor/moment/moment',
+   'calendar-utils':'vendor/calendar-utils/dist/src/calendarUtils'
 };
 
 /** User packages configuration. */
