@@ -1,5 +1,5 @@
 <div class="booking-table-component">
-    <div layout="row" flex="100">
+    <div layout="row">
         <div flex class="booking-table-content" flex="100">
             <header class="c-header" layout="row" layout-align="space-between center">
                 <span class="mw-fs-24">预约中心</span>
@@ -8,37 +8,22 @@
                         Previous
                     </div>
                     <div class="btn btn-default" (click)="today()">
-                        Today
+                        Today {{ date | calendarTitle:view }}
                     </div>
                     <div class="btn btn-primary" (click)="increment()">
                         Next
                     </div>
                 </div>
-                <!-- <div>
-                    <h3>{{ date | calendarTitle:view }}</h3>
-                </div> -->
                 <button md-raised-button color="primary" (click)="btnClick()">primary</button>
             </header>
             <div class="booking-table">
-                <!-- <div class="booking-table-body" flex>
-                    <div class="booking-bar booking-left-bar"></div>
-                    <div class="booking-bar booking-top-bar"></div>
-                    <div layout="row" class="booking-bar booking-grid" style="margin-left:50px;">
-                        <div *ngFor="let item of empList" class="booking-top-item">
-                            <span>{{item.name}}</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="booking-bottom-foot" style="height:50px;">
-                </div> -->
-                <mw-employee-table-view [date]="date" [events]="events" [headers]="empList">
+                <mw-employee-table-view [date]="date" [events]="events" [columns]="tableEmployeeList">
                 </mw-employee-table-view>
-                
             </div>
         </div>
-        <!--<md-card class="side-bar no-padding" [mwCollapse]="sideBarCollapse" flex="20">
+<!--         <md-card class="side-bar no-padding" [mwCollapse]="sideBarCollapse">
             <div class="mw-header">$ 当前营业收入</div>
-        </md-card> -->
+        </md-card>  -->
     </div>
 </div>
 <!--     <div>

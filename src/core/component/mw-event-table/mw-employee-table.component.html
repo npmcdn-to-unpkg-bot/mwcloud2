@@ -11,11 +11,20 @@
             </div>
         </div>
         <div class="hour-col-events" layout="row" flex>
-            <div *ngFor="let header of headers" flex="1" layout="column" class="col-wrap">
+            <div *ngFor="let col of columns" flex="1" layout="column" class="col-wrap">
                 <div class="col-header">
-                    <span>{{header.name}}</span>
+                    <span>{{col.employee.name}}</span>
                 </div>
-                <div flex class="col-body"></div>
+                <div flex class="col-body">
+                    <div class="event"
+                      *ngFor="let order of col?.appointOrderList; trackBy:trackByItem"
+                      [style.marginTop.px]="order.getMarginTop(dayStartHour,60)"
+                      [style.height.px]="order.getHeight(60)">
+                      <span>{{order.startTime | calendarDate:'day':'hour' }}</span>
+                      <br>
+                      <span>{{order.member.name}}</span>
+                    </div>
+                </div>
             </div>
             <!-- <div
             class="event"

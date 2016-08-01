@@ -8,7 +8,7 @@ export class EmployeeModel extends BaseModel{
 	}
 
 	serializer(model:any){
-		super.serializer(model);
+		super.serializer(model.id);
 		this.name = model.employeeName;
 		return this;
 	}

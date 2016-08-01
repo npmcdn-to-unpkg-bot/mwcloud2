@@ -9,9 +9,11 @@ import 'rxjs/add/observable/merge';
 //import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/reduce';
 import 'rxjs/add/operator/switchMap';
+import { LocalStorage,WEB_STORAGE_PROVIDERS } from "h5webstorage";
+
 import { AuthModel } from '../models/auth.model';
 import { HttpService } from './http.service';
-import { LocalStorage,WEB_STORAGE_PROVIDERS } from "h5webstorage";
+import { StoreModel } from '../models/store.model';
 
 
 @Injectable()
@@ -19,7 +21,7 @@ export class AuthService {
     isLogin: boolean = true;
     empInfo: any;
     permissionCodeList: any[] = [];
-    permissionStoreList: any[] = [];
+    permissionStoreList: StoreModel[] = [];
     //constructor(private httpService: HttpService, private window: Window) {}
     constructor(private httpService: HttpService,private localStorage:LocalStorage) {}
 
@@ -54,9 +56,14 @@ export class AuthService {
         // //var merged = Observable.merge(timer1, timer2, timer3, concurrent);
         // var merged = Observable.merge(timer1,timer3,1);
         // merged.subscribe(x => console.log(x));
+        let self = this;
         return Observable.merge(this.getPermissionStoreList(empId), this.getPermissions(empId))
             .reduce((res1: any[], res2: any[]) => {
-                this.permissionStoreList = res1;
+                if(res1){
+                    res1.forEach(function(store,index){
+                        self.permissionStoreList.push(new StoreModel().serializer(store));
+                    });
+                }
                 this.permissionCodeList = res2;
                 return null;
             })

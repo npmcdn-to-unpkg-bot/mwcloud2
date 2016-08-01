@@ -100,7 +100,7 @@ export class MwAppComponent {
                         toasterBody = "未知错误";
                     }
                     if (message.stack) {
-                        console.log(message.stack);
+                        console.error(message.stack);
                     }
                     break;
             }

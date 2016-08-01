@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FORM_DIRECTIVES, NgModel, DatePipe } from '@angular/common';
+import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 import * as moment from 'moment';
 import { UnitOfTime, Moment } from 'moment';
 import {
@@ -16,7 +18,8 @@ import { MwMoney } from '@mw/core/index';
 import { MwTimerPicker } from '@mw/core/component/mw-timer-picker/index';
 import { MdButton } from '@angular2-material/button';
 import { MwCollapseDirective } from '@mw/core/index';
-import { EmployeeModel } from '@mw/core/index';
+import { TableEmployeeModel } from '@mw/core/index';
+import { AppointOrderService } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,
@@ -25,11 +28,11 @@ import { EmployeeModel } from '@mw/core/index';
     styleUrls: ['booking-table.component.css'],
     directives: [MdButton, MwTimerPicker, MwCollapseDirective, MwEmployeeTableView],
     pipes: [CalendarTitle],
-    providers: [CalendarConfig, DatePipe, CalendarDate]
+    providers: [CalendarConfig, DatePipe, CalendarDate, AppointOrderService]
 })
-export class BookingTableComponent implements OnInit {
+export class BookingTableComponent implements OnInit, OnDestroy {
     sideBarCollapse: boolean = false;
-    empList: EmployeeModel[] = [];
+    tableEmployeeList: TableEmployeeModel[] = [];
 
     // selectedDate1: string = '';
     // private myDatePickerOptions1 = {
@@ -55,132 +58,17 @@ export class BookingTableComponent implements OnInit {
     // };
     // selectedDate2: string = '2016-07-21';
 
+    private sub: any;
+    private slideBoxIsOpen: boolean = false;
     private view: UnitOfTime = 'day';
     private date: Date = new Date();
-    private actions: CalendarEventAction[] = [{
-        label: '<i class="fa fa-fw fa-pencil"></i>',
-        onClick: ({ event }: { event: CalendarEvent }): void => {
-            console.log('Edit event', event);
-        }
-    }, {
-        label: '<i class="fa fa-fw fa-times"></i>',
-        onClick: ({ event }: { event: CalendarEvent }): void => {
-            this.events = this.events.filter(iEvent => iEvent !== event);
-        }
-    }];
 
-    private events: CalendarEvent[] = [{
-        start: moment().startOf('week').add(4, 'days').toDate(),
-        end: moment().startOf('week').add(5, 'days').toDate(),
-        title: 'A final event',
-        color: {
-            primary: '#ad2121',
-            secondary: '#FAE3E3'
-        },
-        actions: this.actions
-    }, {
-        start: moment().startOf('week').add(1, 'minutes').add(4, 'days').toDate(),
-        end: moment().startOf('week').add(5, 'days').toDate(),
-        title: 'A final event',
-        color: {
-            primary: '#ad2121',
-            secondary: '#FAE3E3'
-        },
-        actions: this.actions
-    }, {
-        start: moment().startOf('week').add(2, 'minutes').add(4, 'days').toDate(),
-        end: moment().startOf('week').add(5, 'days').toDate(),
-        title: 'A final event',
-        color: {
-            primary: '#ad2121',
-            secondary: '#FAE3E3'
-        },
-        actions: this.actions
-    }, {
-        start: moment().startOf('week').add(6, 'days').toDate(),
-        end: moment().endOf('week').toDate(),
-        title: 'I should be last',
-        color: {
-            primary: '#ad2121',
-            secondary: '#FAE3E3'
-        },
-        actions: this.actions
-    }, {
-        start: moment().startOf('week').add(1, 'minutes').add(6, 'days').toDate(),
-        end: moment().endOf('week').toDate(),
-        title: 'I should be last',
-        color: {
-            primary: '#ad2121',
-            secondary: '#FAE3E3'
-        },
-        actions: this.actions
-    }, {
-        start: moment().startOf('week').add(2, 'minutes').add(6, 'days').toDate(),
-        end: moment().endOf('week').toDate(),
-        title: 'I should be last',
-        color: {
-            primary: '#ad2121',
-            secondary: '#FAE3E3'
-        },
-        actions: this.actions
-    }, {
-        start: moment().startOf('week').add(3, 'minutes').add(6, 'days').toDate(),
-        end: moment().endOf('week').toDate(),
-        title: 'I should be last',
-        color: {
-            primary: '#ad2121',
-            secondary: '#FAE3E3'
-        },
-        actions: this.actions
-    }, {
-        start: moment().startOf('week').toDate(),
-        end: moment().startOf('week').add(5, 'days').toDate(),
-        title: 'Another event',
-        color: {
-            primary: '#e3bc08',
-            secondary: '#FDF1BA'
-        },
-        actions: this.actions
-    }, {
-        start: moment().startOf('week').add(1, 'minutes').toDate(),
-        end: moment().startOf('week').add(5, 'days').toDate(),
-        title: 'Another event',
-        color: {
-            primary: '#e3bc08',
-            secondary: '#FDF1BA'
-        }
-    }, {
-        start: moment().startOf('week').subtract(3, 'days').toDate(),
-        end: moment().endOf('week').add(3, 'days').toDate(),
-        title: 'My event',
-        color: {
-            primary: '#1e90ff',
-            secondary: '#D1E8FF'
-        },
-        actions: this.actions
-    }, {
-        start: moment().startOf('week').add(1, 'days').toDate(),
-        end: moment().startOf('week').add(3, 'days').toDate(),
-        title: '3 day event',
-        color: {
-            primary: '#1e90ff',
-            secondary: '#D1E8FF'
-        },
-        actions: this.actions
-    }, {
-        start: moment().startOf('week').add(1, 'days').toDate(),
-        end: moment().startOf('week').add(2, 'days').toDate(),
-        title: '2 day event',
-        color: {
-            primary: '#1e90ff',
-            secondary: '#D1E8FF'
-        },
-        actions: this.actions
-    }];
-
-    private slideBoxIsOpen: boolean = false;
-
-    constructor(private eventBus: EventBus) {
+    constructor(
+        private eventBus: EventBus,
+        private appointOrderService: AppointOrderService,
+        private route: ActivatedRoute,
+        private slimLoader: SlimLoadingBarService
+    ) {
         // let date = new Date();
         // let money = new MwMoney(123);
         // this.selectedDate1 = (date.getDate() < 10 ? '0' + date.getDate() : date.getDate()) + '.' + ((date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1)) + '.' + date.getFullYear();
@@ -189,30 +77,26 @@ export class BookingTableComponent implements OnInit {
         // date.setDate(date.getDate() - 5);
         // this.myDatePickerOptions1.disableUntil = { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate() }
 
-        for (let i = 0; i < 16; i++) {
-            this.empList.push(new EmployeeModel(i + 1, "技师" + (i + 1) + "号"));
-        }
-
-        // for (let i: number = 0; i < 7; i++) {
-        //     for (let j: number = 0; j < 5; j++) {
-        //         this.events.push({
-        //             start: moment().startOf('week').add(j, 'minutes').add(i, 'days').toDate(),
-        //             title: `Event column ${i} count ${j}`,
-        //             color: {
-        //                 primary: '#1e90ff',
-        //                 secondary: '#D1E8FF'
-        //             }
-        //         });
-        //     }
+        // for (let i = 0; i < 16; i++) {
+        //     this.tableEmployeeList.push(new EmployeeModel(i + 1, "技师" + (i + 1) + "号"));
         // }
     }
 
     ngOnInit() {
+        this.sub = this.route.params.subscribe(params => {
+            //this.orderType = +params['type']; // (+) converts string 'id' to a number
+            this.tableEmployeeList = [];
+            this.getAppointOrder();
+        });
         this.eventBus.notifyDataChanged("menu.select", "booking-table");
     }
 
     onDateChanged1(event: any) {
         console.log('onDateChanged1(): ', event.date, ' - formatted: ', event.formatted, ' - epoc timestamp: ', event.epoc);
+    }
+
+    ngOnDestroy() {
+        this.sub.unsubscribe();
     }
 
     onDateChanged2(event: any) {
@@ -223,7 +107,7 @@ export class BookingTableComponent implements OnInit {
         this.sideBarCollapse = !this.sideBarCollapse;
     }
 
-        increment(): void {
+    increment(): void {
         this.date = moment(this.date).add(1, this.view).toDate();
     }
 
@@ -246,4 +130,156 @@ export class BookingTableComponent implements OnInit {
         }
     }
 
+    private getAppointOrder() {
+        this.slimLoader.start();
+        //this.slimLoader.progress = 30;
+        this.appointOrderService.getAppointOrderTableList("2016-07-29 09:00:00", "2016-07-29 22:00:00")
+            .subscribe(
+                (res) => {
+                    this.tableEmployeeList = res;
+                    this.slimLoader.complete();
+                },
+                (error) => {
+                    this.eventBus.notifyDataChanged("alert.message", error);
+                    this.slimLoader.complete();
+                }
+            );
+    }
+
 }
+
+
+// private actions: CalendarEventAction[] = [{
+//         label: '<i class="fa fa-fw fa-pencil"></i>',
+//         onClick: ({ event }: { event: CalendarEvent }): void => {
+//             console.log('Edit event', event);
+//         }
+//     }, {
+//         label: '<i class="fa fa-fw fa-times"></i>',
+//         onClick: ({ event }: { event: CalendarEvent }): void => {
+//             this.events = this.events.filter(iEvent => iEvent !== event);
+//         }
+//     }];
+
+//     private events: CalendarEvent[] = [{
+//         start: moment().startOf('week').add(4, 'days').toDate(),
+//         end: moment().startOf('week').add(5, 'days').toDate(),
+//         title: 'A final event',
+//         color: {
+//             primary: '#ad2121',
+//             secondary: '#FAE3E3'
+//         },
+//         actions: this.actions
+//     }, {
+//         start: moment().startOf('week').add(1, 'minutes').add(4, 'days').toDate(),
+//         end: moment().startOf('week').add(5, 'days').toDate(),
+//         title: 'A final event',
+//         color: {
+//             primary: '#ad2121',
+//             secondary: '#FAE3E3'
+//         },
+//         actions: this.actions
+//     }, {
+//         start: moment().startOf('week').add(2, 'minutes').add(4, 'days').toDate(),
+//         end: moment().startOf('week').add(5, 'days').toDate(),
+//         title: 'A final event',
+//         color: {
+//             primary: '#ad2121',
+//             secondary: '#FAE3E3'
+//         },
+//         actions: this.actions
+//     }, {
+//         start: moment().startOf('week').add(6, 'days').toDate(),
+//         end: moment().endOf('week').toDate(),
+//         title: 'I should be last',
+//         color: {
+//             primary: '#ad2121',
+//             secondary: '#FAE3E3'
+//         },
+//         actions: this.actions
+//     }, {
+//         start: moment().startOf('week').add(1, 'minutes').add(6, 'days').toDate(),
+//         end: moment().endOf('week').toDate(),
+//         title: 'I should be last',
+//         color: {
+//             primary: '#ad2121',
+//             secondary: '#FAE3E3'
+//         },
+//         actions: this.actions
+//     }, {
+//         start: moment().startOf('week').add(2, 'minutes').add(6, 'days').toDate(),
+//         end: moment().endOf('week').toDate(),
+//         title: 'I should be last',
+//         color: {
+//             primary: '#ad2121',
+//             secondary: '#FAE3E3'
+//         },
+//         actions: this.actions
+//     }, {
+//         start: moment().startOf('week').add(3, 'minutes').add(6, 'days').toDate(),
+//         end: moment().endOf('week').toDate(),
+//         title: 'I should be last',
+//         color: {
+//             primary: '#ad2121',
+//             secondary: '#FAE3E3'
+//         },
+//         actions: this.actions
+//     }, {
+//         start: moment().startOf('week').toDate(),
+//         end: moment().startOf('week').add(5, 'days').toDate(),
+//         title: 'Another event',
+//         color: {
+//             primary: '#e3bc08',
+//             secondary: '#FDF1BA'
+//         },
+//         actions: this.actions
+//     }, {
+//         start: moment().startOf('week').add(1, 'minutes').toDate(),
+//         end: moment().startOf('week').add(5, 'days').toDate(),
+//         title: 'Another event',
+//         color: {
+//             primary: '#e3bc08',
+//             secondary: '#FDF1BA'
+//         }
+//     }, {
+//         start: moment().startOf('week').subtract(3, 'days').toDate(),
+//         end: moment().endOf('week').add(3, 'days').toDate(),
+//         title: 'My event',
+//         color: {
+//             primary: '#1e90ff',
+//             secondary: '#D1E8FF'
+//         },
+//         actions: this.actions
+//     }, {
+//         start: moment().startOf('week').add(1, 'days').toDate(),
+//         end: moment().startOf('week').add(3, 'days').toDate(),
+//         title: '3 day event',
+//         color: {
+//             primary: '#1e90ff',
+//             secondary: '#D1E8FF'
+//         },
+//         actions: this.actions
+//     }, {
+//         start: moment().startOf('week').add(1, 'days').toDate(),
+//         end: moment().startOf('week').add(2, 'days').toDate(),
+//         title: '2 day event',
+//         color: {
+//             primary: '#1e90ff',
+//             secondary: '#D1E8FF'
+//         },
+//         actions: this.actions
+//     }];
+
+
+// for (let i: number = 0; i < 7; i++) {
+//     for (let j: number = 0; j < 5; j++) {
+//         this.events.push({
+//             start: moment().startOf('week').add(j, 'minutes').add(i, 'days').toDate(),
+//             title: `Event column ${i} count ${j}`,
+//             color: {
+//                 primary: '#1e90ff',
+//                 secondary: '#D1E8FF'
+//             }
+//         });
+//     }
+// }

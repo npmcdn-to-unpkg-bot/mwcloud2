@@ -22,6 +22,7 @@
   .col-wrap{
     border-left:thin solid #e1e1e1;
     min-width: 80px;
+    overflow:hidden;
   }
   .hour-event .hour:not(:last-child) .hour-segment,
   .hour-event .hour:last-child .hour-segment:not(:last-child) {

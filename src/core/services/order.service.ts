@@ -33,14 +33,18 @@ export class OrderService {
             page: page,
             size: size,
             query: [
-                { field: "merchantId", value: mchId },
-                { field: "storeId", value: storeId },
                 { field: "status", value: status }
             ],
             sort: [
                 { field: "lastUpdateDate", sort: "desc" },
             ]
         };
+        if(mchId){
+            data.query.push({ field: "merchantId", value: mchId });
+        }
+        if(storeId){
+            data.query.push({ field: "storeId", value: storeId });
+        }
         return this.httpService.request('/api/order/getList', 'post', data)
             .map((res) => {
                 let result: any = {};

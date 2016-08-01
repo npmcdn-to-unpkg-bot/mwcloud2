@@ -10,8 +10,8 @@ export class ItemBaseModel extends BaseModel{
 	}
 
 	serializer(model:any){
-		super.serializer(model.id);
-		this.name = model.itemName;
+		super.serializer(model.itemId||model.id);
+		this.name = model.itemName||model.name;
 		this.price = model.sellingPrice;
 		if(model.orderEmployees && model.orderEmployees.length > 0){
 			this.employeeList = [];
