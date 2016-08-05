@@ -3,6 +3,10 @@ import { Injectable } from '@angular/core';
 //import {  Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/delay';
+
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/observable/merge';
@@ -56,20 +60,30 @@ export class AuthService {
         // //var merged = Observable.merge(timer1, timer2, timer3, concurrent);
         // var merged = Observable.merge(timer1,timer3,1);
         // merged.subscribe(x => console.log(x));
+
+        
         let self = this;
         return Observable.merge(this.getPermissionStoreList(empId), this.getPermissions(empId))
             .reduce((res1: any[], res2: any[]) => {
-                if(res1){
-                    res1.forEach(function(store,index){
-                        self.permissionStoreList.push(new StoreModel().serializer(store));
-                    });
-                }
+                // if(res1){
+                //     res1.forEach(function(store,index){
+                //         self.permissionStoreList.push(new StoreModel().serializer(store));
+                //     });
+                // }
                 this.permissionCodeList = res2;
                 return null;
             })
             .catch((error: any) => {
                 return Observable.throw(error);
             });
+    }
+
+    public getStoreList(){
+        if(this.permissionStoreList && this.permissionStoreList.length > 0){
+            return Observable.of(true).do(val => {return this.permissionStoreList;});
+        }else{
+            return this.getPermissionStoreList(this.empInfo.empId);
+        }
     }
 
     private getPermissions(empId: string) {
@@ -127,12 +141,17 @@ export class AuthService {
     }
 
     private getPermissionStoreList(empId: string) {
+        var self = this;
         return this.httpService.request('/api/employee/permissionStores/' + empId, 'get', null)
             .map((res) => {
+                self.permissionStoreList = [];
+                res.forEach(function(store:any,index:number){
+                    self.permissionStoreList.push(new StoreModel().serializer(store));
+                });
                 return res;
             })
             .catch((error: any) => {
-                this.isLogin = false;
+                self.isLogin = false;
                 return Observable.throw(error);
             });
     }

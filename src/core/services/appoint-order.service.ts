@@ -12,13 +12,13 @@ import { AuthService } from '@mw/core/index';
 export class AppointOrderService {
     constructor(private httpService: HttpService, private authService: AuthService) {}
 
-    getAppointOrderTableList(startTime:string, endTime:string) {
+    getAppointOrderTableList(startTime:string, endTime:string, storeId:number) {
         let data :any= {
             employeeId: this.authService.empInfo.empId,
             merchantId: this.authService.empInfo.mchId,
             startTime: startTime,
             endTime: endTime,
-            storeId:1240323626310282
+            storeId:storeId
         };
         // if(this.authService.empInfo.storeId){
         //     data.storeId = this.authService.empInfo.storeId;

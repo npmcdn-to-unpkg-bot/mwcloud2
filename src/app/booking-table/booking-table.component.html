@@ -8,7 +8,7 @@
                         Previous
                     </div>
                     <div class="btn btn-default" (click)="today()">
-                        Today {{ date | calendarTitle:view }}
+                        {{ date | date:'yyyy-MM-dd' }}
                     </div>
                     <div class="btn btn-primary" (click)="increment()">
                         Next

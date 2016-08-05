@@ -8,6 +8,8 @@ import {
     ChangeDetectorRef
 } from '@angular/core';
 import { NgFor, NgIf, NgClass, DatePipe } from '@angular/common';
+
+import { DND_DIRECTIVES, DND_PROVIDERS } from 'ng2-dnd/ng2-dnd';
 import { getDayView, getDayViewHourGrid, CalendarEvent, DayView, DayViewHour } from 'calendar-utils';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
@@ -22,10 +24,10 @@ const SEGMENT_HEIGHT: number = 30;
     moduleId: module.id,
     selector: 'mw-employee-table-view',
     styleUrls: ['./scss/mw-employee-table.css'],
-    directives: [NgFor, NgIf, NgClass],
+    directives: [NgFor, NgIf, NgClass,DND_DIRECTIVES],
     changeDetection: ChangeDetectionStrategy.OnPush,
     pipes: [CalendarDate, CalendarEventTitle],
-    providers: [DatePipe],
+    providers: [DatePipe,DND_PROVIDERS],
     templateUrl: 'mw-employee-table.component.html'
 })
 export class MwEmployeeTableView implements OnChanges {
@@ -65,7 +67,6 @@ export class MwEmployeeTableView implements OnChanges {
     }
 
     ngOnChanges(changes: any): void {
-
         if (
             changes.date ||
             changes.dayStartHour ||
@@ -88,7 +89,10 @@ export class MwEmployeeTableView implements OnChanges {
         ) {
             this.refreshView();
         }
+    }
 
+    onDropSuccess(ev:any,employee:any){
+        //debugger;
     }
 
     private trackByItem(index: number, obj: any): any {

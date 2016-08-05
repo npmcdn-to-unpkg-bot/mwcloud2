@@ -9,7 +9,7 @@ import { MwThemePreloader } from '@mw/core/index';
 import { MwImageLoaderService } from '@mw/core/index';
 import { OrderStatus } from '@mw/core/index';
 import { EventBus } from '@mw/core/index';
-import { AuthService } from '@mw/core/index';
+//import { AuthService } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,
@@ -35,8 +35,8 @@ export class DashboardComponent {
     constructor(
         private imageLoader: MwImageLoaderService,
         private spinner: MwThemeSpinner,
-        private eventBus :EventBus,
-        private authService: AuthService
+        private eventBus :EventBus
+        //private authService: AuthService
     ) {
         //this.loadImages();
         
@@ -44,7 +44,7 @@ export class DashboardComponent {
         this.eventBus.subscribe('menu.select', (menuName: string) => {
              this.selectedMenu = menuName;
         });
-        this.getPermission(this.authService.empInfo.empId);
+        //this.getPermission(this.authService.empInfo.empId);
     }
 
     public ngAfterViewInit(): void {
@@ -54,15 +54,15 @@ export class DashboardComponent {
         //});
     }
 
-    private getPermission(empId: string) {
-        this.authService.getPermission(empId).subscribe(
-            (res) => {},
-            (error) => {
-                //this.slimLoader.complete();
-                this.eventBus.notifyDataChanged("alert.message", error);
-            }
-        );
-    }
+    // private getPermission(empId: string) {
+    //     this.authService.getPermission(empId).subscribe(
+    //         (res) => {},
+    //         (error) => {
+    //             //this.slimLoader.complete();
+    //             this.eventBus.notifyDataChanged("alert.message", error);
+    //         }
+    //     );
+    // }
 
     private loadImages(): void {
         // register some loaders

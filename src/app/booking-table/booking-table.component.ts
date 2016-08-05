@@ -20,6 +20,7 @@ import { MdButton } from '@angular2-material/button';
 import { MwCollapseDirective } from '@mw/core/index';
 import { TableEmployeeModel } from '@mw/core/index';
 import { AppointOrderService } from '@mw/core/index';
+import { AuthService } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,
@@ -67,7 +68,8 @@ export class BookingTableComponent implements OnInit, OnDestroy {
         private eventBus: EventBus,
         private appointOrderService: AppointOrderService,
         private route: ActivatedRoute,
-        private slimLoader: SlimLoadingBarService
+        private slimLoader: SlimLoadingBarService,
+        private authService: AuthService
     ) {
         // let date = new Date();
         // let money = new MwMoney(123);
@@ -86,7 +88,24 @@ export class BookingTableComponent implements OnInit, OnDestroy {
         this.sub = this.route.params.subscribe(params => {
             //this.orderType = +params['type']; // (+) converts string 'id' to a number
             this.tableEmployeeList = [];
-            this.getAppointOrder();
+            this.authService.getStoreList()
+                .subscribe(
+                    (res) => {
+                        let storeId:number;
+                        if(res && res.length > 0){
+                            storeId = res[0].id;
+                        }else{
+                            storeId = 1240323626310282;
+                        }
+                        this.getAppointOrder(storeId);
+                        this.slimLoader.complete();
+                    },
+                    (error) => {
+                        this.eventBus.notifyDataChanged("alert.message", error);
+                        this.slimLoader.complete();
+                    }
+                );
+            
         });
         this.eventBus.notifyDataChanged("menu.select", "booking-table");
     }
@@ -109,10 +128,12 @@ export class BookingTableComponent implements OnInit, OnDestroy {
 
     increment(): void {
         this.date = moment(this.date).add(1, this.view).toDate();
+        this.getAppointOrder(1240323626310282);
     }
 
     decrement(): void {
         this.date = moment(this.date).subtract(1, this.view).toDate();
+        this.getAppointOrder(1240323626310282);
     }
 
     today(): void {
@@ -130,10 +151,11 @@ export class BookingTableComponent implements OnInit, OnDestroy {
         }
     }
 
-    private getAppointOrder() {
+    private getAppointOrder(storeId:number) {
         this.slimLoader.start();
-        //this.slimLoader.progress = 30;
-        this.appointOrderService.getAppointOrderTableList("2016-07-29 09:00:00", "2016-07-29 22:00:00")
+        var startTime = moment(this.date).format("YYYY-MM-DD")+" 00:00:00";
+        var endTime = moment(this.date).add(1,'days').format("YYYY-MM-DD")+" 00:00:00";
+        this.appointOrderService.getAppointOrderTableList(startTime, endTime,storeId)
             .subscribe(
                 (res) => {
                     this.tableEmployeeList = res;

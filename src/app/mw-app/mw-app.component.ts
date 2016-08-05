@@ -5,13 +5,14 @@ import { ToasterContainerComponent, ToasterService, ToasterConfig } from 'angula
 import { EventBus } from '@mw/core/index';
 import { AuthService } from '@mw/core/index';
 import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
-import {LocalStorage} from "h5webstorage";
+import { LocalStorage } from "h5webstorage";
 
 @Component({
     moduleId: module.id,
     selector: 'mw-app',
     providers: [
-        EventBus
+        EventBus,
+        AuthService
     ],
     templateUrl: 'mw-app.component.html',
     styleUrls: ['mw-app.component.css'],

@@ -122,7 +122,7 @@ function _buildAppTree(defaults) {
       'font-awesome/**/*',
       'angular2-toaster/**/*',
       'ng2-slim-loading-bar/**/*.+(ts|css|js|js.map)',
-      'ng2-dnd/bundles/**/*.+(ts|js|js.map)',
+      'ng2-dnd/**/*.+(ts|js|css|js.map)',
       'intl/dist/*.min.+(js|js.map)',
       'ng2-pagination/dist/*.+(js|js.map)',
       'h5webstorage/*.+(js|js.map)',

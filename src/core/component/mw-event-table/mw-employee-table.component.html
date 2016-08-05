@@ -15,8 +15,8 @@
                 <div class="col-header">
                     <span>{{col.employee.name}}</span>
                 </div>
-                <div flex class="col-body">
-                    <div class="event"
+                <div flex class="col-body" dnd-droppable (onDropSuccess)="onDropSuccess($event,col)" [dropZones]="['delete-dropZone']">
+                    <div class="event" dnd-draggable [dragEnabled]="true" [dragData]="order" [dropZones]="['delete-dropZone']"
                       *ngFor="let order of col?.appointOrderList; trackBy:trackByItem"
                       [style.marginTop.px]="order.getMarginTop(dayStartHour,60)"
                       [style.height.px]="order.getHeight(60)">
