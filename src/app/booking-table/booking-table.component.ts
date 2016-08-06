@@ -3,6 +3,10 @@ import { FORM_DIRECTIVES, NgModel, DatePipe } from '@angular/common';
 import { ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+import { SELECT_DIRECTIVES } from 'ng2-select/ng2-select';
+import { NKDatetime } from 'ng2-datetime/ng2-datetime';
+
+import { SweetAlertService } from '@mw/core/index';
 import * as moment from 'moment';
 import { UnitOfTime, Moment } from 'moment';
 import {
@@ -27,7 +31,7 @@ import { AuthService } from '@mw/core/index';
     selector: 'booking-table',
     templateUrl: 'booking-table.component.html',
     styleUrls: ['booking-table.component.css'],
-    directives: [MdButton, MwTimerPicker, MwCollapseDirective, MwEmployeeTableView],
+    directives: [MdButton, MwTimerPicker, MwCollapseDirective, MwEmployeeTableView,SELECT_DIRECTIVES,NKDatetime],
     pipes: [CalendarTitle],
     providers: [CalendarConfig, DatePipe, CalendarDate, AppointOrderService]
 })
@@ -64,12 +68,40 @@ export class BookingTableComponent implements OnInit, OnDestroy {
     private view: UnitOfTime = 'day';
     private date: Date = new Date();
 
+    public items:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
+    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
+    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin',
+    'Düsseldorf', 'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg',
+    'Hamburg', 'Hannover', 'Helsinki', 'Kraków', 'Leeds', 'Leipzig', 'Lisbon',
+    'London', 'Madrid', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Málaga',
+    'Naples', 'Palermo', 'Paris', 'Poznań', 'Prague', 'Riga', 'Rome',
+    'Rotterdam', 'Seville', 'Sheffield', 'Sofia', 'Stockholm', 'Stuttgart',
+    'The Hague', 'Turin', 'Valencia', 'Vienna', 'Vilnius', 'Warsaw', 'Wrocław',
+    'Zagreb', 'Zaragoza', 'Łódź'];
+
+    public selected(value:any):void {
+    console.log('Selected value is: ', value);
+  }
+
+  public removed(value:any):void {
+    console.log('Removed value is: ', value);
+  }
+
+  public typed(value:any):void {
+    console.log('New search input: ', value);
+  }
+
+  public refreshValue(value:any):void {
+    //this.value = value;
+  }
+
     constructor(
         private eventBus: EventBus,
         private appointOrderService: AppointOrderService,
         private route: ActivatedRoute,
         private slimLoader: SlimLoadingBarService,
-        private authService: AuthService
+        private authService: AuthService,
+        private sweetAlert: SweetAlertService
     ) {
         // let date = new Date();
         // let money = new MwMoney(123);
@@ -82,6 +114,7 @@ export class BookingTableComponent implements OnInit, OnDestroy {
         // for (let i = 0; i < 16; i++) {
         //     this.tableEmployeeList.push(new EmployeeModel(i + 1, "技师" + (i + 1) + "号"));
         // }
+        
     }
 
     ngOnInit() {
@@ -124,6 +157,7 @@ export class BookingTableComponent implements OnInit, OnDestroy {
 
     btnClick() {
         this.sideBarCollapse = !this.sideBarCollapse;
+        this.sweetAlert.alert('cc');
     }
 
     increment(): void {

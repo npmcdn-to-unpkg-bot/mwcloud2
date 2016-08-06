@@ -13,10 +13,17 @@ const map: any = {
    'angular2-toaster': 'vendor/angular2-toaster',
    'ng2-slim-loading-bar': 'vendor/ng2-slim-loading-bar',
    'ng2-dnd': 'vendor/ng2-dnd',
+   'ng2-select': 'vendor/ng2-select',
+   'ng2-datetime': 'vendor/ng2-datetime/src/ng2-datetime',
    'ng2-pagination': 'vendor/ng2-pagination/dist/ng2-pagination',
    'h5webstorage':'vendor/h5webstorage/index',
    'moment':'vendor/moment/moment',
-   'calendar-utils':'vendor/calendar-utils/dist/src/calendarUtils'
+   'calendar-utils':'vendor/calendar-utils/dist/src/calendarUtils',
+   'sweetalert2': 'vendor/sweetalert2/dist/sweetalert2.min',
+   'lodash.assign': 'vendor/lodash.assign/index',
+   'lodash.keys': 'vendor/lodash.keys/index',
+   'lodash.rest': 'vendor/lodash.rest/index',
+   'jquery': 'vendor/jquery/dist/jquery.min'
 };
 
 /** User packages configuration. */
@@ -28,6 +35,7 @@ const packages: any = {
   // Set the default extension for the root package, because otherwise the demo-app can't
   // be built within the production mode. Due to missing file extensions.
   '.': {
+    format: 'cjs',
     defaultExtension: 'js'
   }
 };

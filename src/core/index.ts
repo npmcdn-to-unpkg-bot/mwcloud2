@@ -24,6 +24,7 @@ export { QuestionControlService } from './services/question-control.service';
 export { QuestionService } from './services/question.service';
 export { MoneyService } from './services/money.service';
 export { AppointOrderService } from './services/appoint-order.service';
+export { SweetAlertService } from './services/sweet-alert.service';
 
 //directive
 export { HighlightDirective } from './directives/highlight.directive';

@@ -92,12 +92,15 @@ function _buildAppTree(defaults) {
   return new Angular2App(defaults, inputNode, {
     sourceDir: sourceDir,
     polyfills: [
+      'vendor/jquery/dist/jquery.min.js',
       'vendor/core-js/client/core.js',
       'vendor/systemjs/dist/system.src.js',
       'vendor/zone.js/dist/zone.js',
       'vendor/hammerjs/hammer.min.js',
       'vendor/intl/dist/intl.min.js',
-      'vendor/ng2-pagination/dist/ng2-pagination-bundle.js'
+      'vendor/ng2-pagination/dist/ng2-pagination-bundle.js',
+      'vendor/ng2-datetime/src/vendor/bootstrap-datepicker/bootstrap-datepicker.min.js',
+      'vendor/ng2-datetime/src/vendor/bootstrap-timepicker/bootstrap-timepicker.min.js'
     ],
     tsCompiler: {},
     sassCompiler: {
@@ -118,13 +121,20 @@ function _buildAppTree(defaults) {
       'jasmine-core/lib/jasmine-core/**/*',
       'reflect-metadata/Reflect.js',
       'bootstrap/**/*',
+      'jquery/dist/jquery.min.js',
       'material-design-icons-iconfont/dist/**/*',
       'font-awesome/**/*',
       'angular2-toaster/**/*',
       'ng2-slim-loading-bar/**/*.+(ts|css|js|js.map)',
       'ng2-dnd/**/*.+(ts|js|css|js.map)',
-      'intl/dist/*.min.+(js|js.map)',
       'ng2-pagination/dist/*.+(js|js.map)',
+      'ng2-select/**/*.+(js|ts|css|js.map)',
+      'ng2-datetime/**/*.+(js|ts|css|js.map)',
+      'sweetalert2/**/*.+(js|ts|css|js.map)',
+      'lodash.assign/index.js',
+      'lodash.keys/index.js',
+      'lodash.rest/index.js',
+      'intl/dist/*.min.+(js|js.map)',
       'h5webstorage/*.+(js|js.map)',
       'moment/moment.js',
       'calendar-utils/dist/src/*.+(ts|js|js.map)',

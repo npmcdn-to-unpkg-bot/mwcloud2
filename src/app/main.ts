@@ -5,6 +5,7 @@ import { disableDeprecatedForms, provideForms } from '@angular/forms';
 import { ToasterService, ToasterConfig } from 'angular2-toaster/angular2-toaster';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 import { WEB_STORAGE_PROVIDERS} from "h5webstorage";
+import { SweetAlertService } from '@mw/core/index';
 
 import { environment } from './environment';
 import { MwAppComponent } from './mw-app/mw-app.component';
@@ -20,6 +21,7 @@ bootstrap(MwAppComponent, [
         HttpService,
         ToasterService,
         SlimLoadingBarService,
+        SweetAlertService,
         MW_APP_ROUTER_PROVIDERS,
         disableDeprecatedForms(),
         provideForms(),
