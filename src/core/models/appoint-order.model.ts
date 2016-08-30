@@ -14,6 +14,8 @@ export class AppointOrderModel extends BaseModel {
     itemList:ItemBaseModel[];
     startTime:Date;
     endTime:Date;
+    left:number;
+    width:number;
     constructor(id?: number){
         super(id);
     }
@@ -50,6 +52,9 @@ export class AppointOrderTableModel extends AppointOrderModel {
 
     getMarginTop(dayStartHour:number,hourPX:number){
         return (this.startTime.getHours()-dayStartHour)*hourPX + this.startTime.getMinutes();
+    }
+    getTop(dayStartHour:number,hourPX:number,headerHeight:number){
+        return (this.startTime.getHours()-dayStartHour)*hourPX + this.startTime.getMinutes()+headerHeight;
     }
     getHeight(hourPX:number){
         if(this.startTime > this.endTime){

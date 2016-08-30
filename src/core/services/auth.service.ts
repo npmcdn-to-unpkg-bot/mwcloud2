@@ -148,7 +148,7 @@ export class AuthService {
                 res.forEach(function(store:any,index:number){
                     self.permissionStoreList.push(new StoreModel().serializer(store));
                 });
-                return res;
+                return self.permissionStoreList;
             })
             .catch((error: any) => {
                 self.isLogin = false;

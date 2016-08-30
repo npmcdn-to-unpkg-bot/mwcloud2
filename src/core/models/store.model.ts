@@ -6,6 +6,7 @@ import { ItemFactory } from './item.factory';
 
 export class StoreModel extends BaseModel {
     name:string;
+    text:string;
     fullName:string;
     storeNo:string;
     openStartTime:string;
@@ -20,6 +21,7 @@ export class StoreModel extends BaseModel {
     serializer(model:any){
         super.serializer(model.id);
         this.name = model.name;
+        this.text = model.name;
         this.openStartTime = model.openTimeStart;
         this.openEndTime = model.openTimeEnd;
         this.appointStartTime = model.appoinmentTimeStart;

@@ -32,22 +32,24 @@ const SEGMENT_HEIGHT: number = 30;
 })
 export class MwEmployeeTableView implements OnChanges {
 
-    @Input() date: Date;
-    @Input() events: CalendarEvent[] = [];
-    @Input() columns: TableEmployeeModel[] = [];
-    @Input() hourSegments: number = 2;
-    @Input() dayStartHour: number = 0;
-    @Input() dayStartMinute: number = 0;
-    @Input() dayEndHour: number = 23;
-    @Input() dayEndMinute: number = 59;
-    @Input() eventWidth: number = 150;
-    @Input() refresh: Subject < any > ;
-    @Output() eventClicked: EventEmitter < any > = new EventEmitter();
-    @Output() hourSegmentClicked: EventEmitter < any > = new EventEmitter();
+    @Input() date                : Date;
+    @Input() events              : CalendarEvent[] = [];
+    @Input() columns             : TableEmployeeModel[] = [];
+    @Input() hourSegments        : number = 2;
+    @Input() dayStartHour        : number = 0;
+    @Input() dayStartMinute      : number = 0;
+    @Input() dayEndHour          : number = 23;
+    @Input() dayEndMinute        : number = 59;
+    @Input() eventWidth          : number = 150;
+    @Input() refresh             : Subject < any > ;
+    @Output() eventClicked       : EventEmitter < any > = new EventEmitter();
+    @Output() hourSegmentClicked : EventEmitter < any > = new EventEmitter();
     private hours: DayViewHour[] = [];
     private view: DayView;
     private width: number = 0;
     private refreshSubscription: Subscription;
+    private showEventDetail:boolean = false;
+    private eventDetailWrap:any = {};
 
     constructor(private cdr: ChangeDetectorRef) {}
 
@@ -95,6 +97,18 @@ export class MwEmployeeTableView implements OnChanges {
         //debugger;
     }
 
+    eventClick(ev:any,index:number){
+        let left = parseInt(ev.currentTarget.style.marginLeft);
+        if(!left){
+            left = 0;
+        }
+        let width = ev.currentTarget.clientWidth+14;
+        let parentWidth = ev.currentTarget.parentElement.clientWidth;
+        this.eventDetailWrap.left = left+width+parentWidth*index;
+        this.eventDetailWrap.top = parseInt(ev.currentTarget.style.top)+SEGMENT_HEIGHT;
+        this.showEventDetail = !this.showEventDetail;
+    }
+
     private trackByItem(index: number, obj: any): any {
         return obj;
     }
@@ -115,21 +129,27 @@ export class MwEmployeeTableView implements OnChanges {
     }
 
     private refreshView(): void {
-        // if (this.columns && this.columns.length > 0) {
-        //     // for(let i in this.columns){
-        //     //   if(this.columns[i].)
-        //     // }
-        //     var _this = this;
-        //     this.columns.forEach(function(item, index) {
-        //         if (item.appointOrderList) {
-        //             item.appointOrderList.forEach(function(orderItem, index) {
-        //                   orderItem.top = (orderItem.startTime.getHours()-_this.dayStartHour) * 60 + orderItem.startTime.getMinutes();
-        //                   orderItem.height = (orderItem.endTime.getHours() - orderItem.startTime.getHours()) * 60 
-        //                       + (orderItem.endTime.getMinutes() - orderItem.startTime.getMinutes());
-        //             });
-        //         }
-        //     });
-        // }
+        if (this.columns && this.columns.length > 0) {
+            // for(let i in this.columns){
+            //   if(this.columns[i].)
+            // }
+            var _this = this;
+            this.columns.forEach(function(item, index) {
+                if (item.appointOrderList) {
+                    let startIndex:number = 0;
+                    let endIndex:number = 0;
+                    item.appointOrderList.forEach(function(orderItem, index) {
+                        if(lastItem){
+
+                        }else{
+                            lastItem = orderItem;
+                        }
+                          orderItem.left = 0;
+                          orderItem.width = 0;
+                    });
+                }
+            });
+        }
         // this.view = getDayView({
         //   events: this.events,
         //   viewDate: this.date,

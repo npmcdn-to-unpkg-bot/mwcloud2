@@ -15,13 +15,8 @@
                     </div>
                 </div>
                 <ng-select [allowClear]="true"
-                    [items]="items"
-                    [disabled]="disabled"
-                    (data)="refreshValue($event)"
-                    (selected)="selected($event)"
-                    (removed)="removed($event)"
-                    (typed)="typed($event)"
-                    placeholder="No city selected"
+                    [(items)]="storeList"
+                    placeholder="请选择门店"
                     style="min-width:200px;">
                 </ng-select>
                 <datetime [(ngModel)]="date"></datetime>

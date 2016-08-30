@@ -25,13 +25,14 @@ import { MwCollapseDirective } from '@mw/core/index';
 import { TableEmployeeModel } from '@mw/core/index';
 import { AppointOrderService } from '@mw/core/index';
 import { AuthService } from '@mw/core/index';
+import { StoreModel } from '@mw/core/index';
 
 @Component({
     moduleId: module.id,
     selector: 'booking-table',
     templateUrl: 'booking-table.component.html',
     styleUrls: ['booking-table.component.css'],
-    directives: [MdButton, MwTimerPicker, MwCollapseDirective, MwEmployeeTableView,SELECT_DIRECTIVES,NKDatetime],
+    directives: [MdButton, MwTimerPicker, MwCollapseDirective, MwEmployeeTableView, SELECT_DIRECTIVES, NKDatetime],
     pipes: [CalendarTitle],
     providers: [CalendarConfig, DatePipe, CalendarDate, AppointOrderService]
 })
@@ -67,33 +68,7 @@ export class BookingTableComponent implements OnInit, OnDestroy {
     private slideBoxIsOpen: boolean = false;
     private view: UnitOfTime = 'day';
     private date: Date = new Date();
-
-    public items:Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
-    'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
-    'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin',
-    'Düsseldorf', 'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg',
-    'Hamburg', 'Hannover', 'Helsinki', 'Kraków', 'Leeds', 'Leipzig', 'Lisbon',
-    'London', 'Madrid', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Málaga',
-    'Naples', 'Palermo', 'Paris', 'Poznań', 'Prague', 'Riga', 'Rome',
-    'Rotterdam', 'Seville', 'Sheffield', 'Sofia', 'Stockholm', 'Stuttgart',
-    'The Hague', 'Turin', 'Valencia', 'Vienna', 'Vilnius', 'Warsaw', 'Wrocław',
-    'Zagreb', 'Zaragoza', 'Łódź'];
-
-    public selected(value:any):void {
-    console.log('Selected value is: ', value);
-  }
-
-  public removed(value:any):void {
-    console.log('Removed value is: ', value);
-  }
-
-  public typed(value:any):void {
-    console.log('New search input: ', value);
-  }
-
-  public refreshValue(value:any):void {
-    //this.value = value;
-  }
+    private storeList: StoreModel[] = [];
 
     constructor(
         private eventBus: EventBus,
@@ -114,7 +89,7 @@ export class BookingTableComponent implements OnInit, OnDestroy {
         // for (let i = 0; i < 16; i++) {
         //     this.tableEmployeeList.push(new EmployeeModel(i + 1, "技师" + (i + 1) + "号"));
         // }
-        
+
     }
 
     ngOnInit() {
@@ -124,10 +99,11 @@ export class BookingTableComponent implements OnInit, OnDestroy {
             this.authService.getStoreList()
                 .subscribe(
                     (res) => {
-                        let storeId:number;
-                        if(res && res.length > 0){
-                            storeId = res[0].id;
-                        }else{
+                        let storeId: number;
+                        this.storeList = res;
+                        if (this.storeList && this.storeList.length > 0) {
+                            storeId = this.storeList[0].id;
+                        } else {
                             storeId = 1240323626310282;
                         }
                         this.getAppointOrder(storeId);
@@ -138,7 +114,7 @@ export class BookingTableComponent implements OnInit, OnDestroy {
                         this.slimLoader.complete();
                     }
                 );
-            
+
         });
         this.eventBus.notifyDataChanged("menu.select", "booking-table");
     }
@@ -160,21 +136,21 @@ export class BookingTableComponent implements OnInit, OnDestroy {
         this.sweetAlert.alert('cc');
     }
 
-    increment(): void {
+    increment() {
         this.date = moment(this.date).add(1, this.view).toDate();
         this.getAppointOrder(1240323626310282);
     }
 
-    decrement(): void {
+    decrement() {
         this.date = moment(this.date).subtract(1, this.view).toDate();
         this.getAppointOrder(1240323626310282);
     }
 
-    today(): void {
+    today() {
         this.date = new Date();
     }
 
-    dayClicked({ date, events }: { date: Moment, events: CalendarEvent[] }): void {
+    dayClicked({ date, events }: { date: Moment, events: CalendarEvent[] }) {
         if (moment(date).startOf('month').isSame(moment(this.date).startOf('month'))) {
             if ((this.date.getTime() === date.toDate().getTime() && this.slideBoxIsOpen === true) || events.length === 0) {
                 this.slideBoxIsOpen = false;
@@ -185,11 +161,11 @@ export class BookingTableComponent implements OnInit, OnDestroy {
         }
     }
 
-    private getAppointOrder(storeId:number) {
+    private getAppointOrder(storeId: number) {
         this.slimLoader.start();
-        var startTime = moment(this.date).format("YYYY-MM-DD")+" 00:00:00";
-        var endTime = moment(this.date).add(1,'days').format("YYYY-MM-DD")+" 00:00:00";
-        this.appointOrderService.getAppointOrderTableList(startTime, endTime,storeId)
+        var startTime = moment(this.date).format("YYYY-MM-DD") + " 00:00:00";
+        var endTime = moment(this.date).add(1, 'days').format("YYYY-MM-DD") + " 00:00:00";
+        this.appointOrderService.getAppointOrderTableList(startTime, endTime, storeId)
             .subscribe(
                 (res) => {
                     this.tableEmployeeList = res;

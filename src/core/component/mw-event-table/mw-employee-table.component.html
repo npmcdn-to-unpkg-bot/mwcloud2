@@ -11,20 +11,28 @@
             </div>
         </div>
         <div class="hour-col-events" layout="row" flex>
-            <div *ngFor="let col of columns" flex="1" layout="column" class="col-wrap">
+            <div *ngFor="let col of columns;let idx=index;" flex="1" layout="column" class="col-wrap">
                 <div class="col-header">
                     <span>{{col.employee.name}}</span>
                 </div>
                 <div flex class="col-body" dnd-droppable (onDropSuccess)="onDropSuccess($event,col)" [dropZones]="['delete-dropZone']">
                     <div class="event" dnd-draggable [dragEnabled]="true" [dragData]="order" [dropZones]="['delete-dropZone']"
                       *ngFor="let order of col?.appointOrderList; trackBy:trackByItem"
-                      [style.marginTop.px]="order.getMarginTop(dayStartHour,60)"
+                      (click)="eventClick($event,idx)"
+                      [style.left.px]="order.left"
+                      [style.width.px]="order.width"
+                      [style.top.px]="order.getTop(dayStartHour,60,30)"
                       [style.height.px]="order.getHeight(60)">
                       <span>{{order.startTime | calendarDate:'day':'hour' }}</span>
                       <br>
                       <span>{{order.member.name}}</span>
                     </div>
                 </div>
+            </div>
+            <div class="float-wrap mw-shadow" *ngIf="showEventDetail"
+                [style.left.px]="eventDetailWrap.left"
+                [style.top.px]="eventDetailWrap.top">
+                
             </div>
             <!-- <div
             class="event"

@@ -6,7 +6,7 @@
 @import 'core/style/preloader';
 @import 'core/style/font-size';
 @import 'core/style/color-const';
-
+@import 'core/style/mixins';
 // * {
 //     -webkit-font-smoothing: antialiased;
 //     -moz-osx-font-smoothing: grayscale;
@@ -35,55 +35,25 @@ body {
     padding: 0;
 }
 
-a,
-a:hover {
-    text-decoration: none;
+//mw-colors
+.mw-white {
+    color: #fff;
 }
 
-md-card{
-    color:inherit!important;
+.mw-primary {
+    color: $mw-primary;
 }
 
-md-list {
-    padding-top: 0!important;
-    .list-header {
-        text-align: center;
-        padding: 10px 0;
-        background: #f8f8f8;
-        //border-bottom: 1px solid #f8f8f8;
+//mw-class
+.mw-shadow{
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2),0 1px 1px 0 rgba(0,0,0,.14),0 2px 1px -1px rgba(0,0,0,.12);
+}
+.mw-pagination {
+    padding-bottom: 1px;
+    text-align: center;
+    ul {
+        padding-left: 0;
     }
-    md-list-item {
-        display: block;
-        text-align: center;
-        padding: 10px 0;
-        @extend .mw-fs-12;
-    }
-    md-list-item:hover {
-        background: #f5f5f6;
-    }
-}
-
-.no-padding {
-    padding: 0;
-}
-
-.no-margin {
-    margin: 0;
-}
-
-.mw-white{
-    color:#fff;
-}
-.mw-pagination{
-    padding-bottom:1px;
-    text-align:center;
-    ul{
-        padding-left:0;
-    }
-}
-
-.c-header {
-    height: 60px;
 }
 
 .mw-header,
@@ -115,30 +85,85 @@ md-list {
     cursor: pointer;
 }
 
+// md-class
+md-card {
+    color: inherit!important;
+}
+
+md-list {
+    padding-top: 0!important;
+    .list-header {
+        text-align: center;
+        padding: 10px 0;
+        background: #f8f8f8;
+        //border-bottom: 1px solid #f8f8f8;
+    }
+    md-list-item {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+        @extend .mw-fs-12;
+    }
+    md-list-item:hover {
+        background: #f5f5f6;
+    }
+}
+
+//mixins
+.triangle-right {
+    @include triangle(right, 12px, $border);
+}
+.triangle-left {
+    @include triangle(left, 7px, $border);
+}
+
+//others
+a,
+a:hover {
+    text-decoration: none;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
 .side-bar {
     margin-top: 12px;
 }
-.avatar-circle{
+
+.avatar-circle {
     height: 50px;
     width: 50px;
-    img{
-        width:50px;
-        height:50px;
+    img {
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
     }
 }
+
 .text-overflow {
     display: inline-block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.icon-female{
-    color:$female;
+
+.icon-female {
+    color: $female;
 }
-.icon-male{
-    color:$male;
+
+.icon-male {
+    color: $male;
 }
+
 .datepicker>div {
     display: block;
 }
+.c-header {
+    height: 60px;
+}
+
